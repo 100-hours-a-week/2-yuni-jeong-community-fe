@@ -28,13 +28,3 @@
     color: #000000;
     margin-bottom: 8px;
 }
-
-.back-button {
-    position: absolute;
-    left: 35%;
-    font-size: 24px;
-    color: #000000;
-    text-decoration: none;
-    cursor: pointer;
-    margin-right: auto;
-}
