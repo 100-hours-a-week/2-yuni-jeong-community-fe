@@ -3,13 +3,14 @@ body {
 }
 
 .community-header {
-    width: 100%;
     height: 104px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid #000;
     background-color: #F4F5F7;
+    padding: 0 25%;
+    margin: 0 auto;
 }
 
 .community-title {
@@ -19,6 +20,7 @@ body {
     line-height: 32px;  
     text-align: center;
     color: #000000;
+    flex: 1;
 }
 .page-title {
     font-family: 'Pretendard', sans-serif;
@@ -32,6 +34,8 @@ body {
     justify-content: center;
 }
 
+<<<<<<< Updated upstream:community/css/login.css
+<<<<<<< Updated upstream:community/css/login.css
 .form-container {
     width: 355px;
     height: 33;
@@ -50,6 +54,10 @@ body {
     flex-direction: column;
     gap: 8px;
 }
+=======
+>>>>>>> Stashed changes:community/css/common.css
+=======
+>>>>>>> Stashed changes:community/css/common.css
 .input-group label {
     font-family: 'Pretendard', sans-serif;
     font-size: 15px;
@@ -104,47 +112,105 @@ body {
     cursor: pointer;
     border: none;
 }
-/*
-회원가입 페이지
-*/
-.profile-photo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.profile-photo {
-    width: 100px;
-    height: 100px;
-    background-color: #C4C4C4;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    position: relative;
-}
 
-.plus-icon {
-    font-size: 40px;
-    color: #000;
-    font-weight: 300;
-}
-
-.input-label {
-    font-family: 'Pretendard', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 8px;
-}
 
 .back-button {
-    position: absolute;
-    left: 35%;
+    /* position: absolute;
+    left: 25%;
     font-size: 24px;
     color: #000000;
     text-decoration: none;
     cursor: pointer;
-    margin-right: auto;
+    margin-right: auto; */
+    font-size: 24px;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
+<<<<<<< Updated upstream:community/css/login.css
+=======
+
+
+/* 폼, 버튼 등의 공통 스타일 */
+.form-container {
+    width: 355px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.input-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #F4F5F7;
+}
+
+.helper-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #FF0000;
+}
+
+.submitButton {
+    width: 100%;
+    height: 37px;
+    background-color: #ACA0EB;
+    color: #FFFFFF;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.bottomButton {
+    width: 100%;
+    height: 30px;
+    background-color: #F4F5F7;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
+.user-profile {
+    width: 36px;
+    height: 36px;
+    right: 25%;
+    border-radius: 50%; 
+    object-fit: cover;
+<<<<<<< Updated upstream:community/css/login.css
+}
+>>>>>>> Stashed changes:community/css/common.css
+=======
+}
+>>>>>>> Stashed changes:community/css/common.css
