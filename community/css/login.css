@@ -9,7 +9,6 @@ body {
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid #000;
-    opacity: 1;
     background-color: #F4F5F7;
 }
 
@@ -105,3 +104,47 @@ body {
     cursor: pointer;
     border: none;
 }
+/*
+회원가입 페이지
+*/
+.profile-photo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-photo {
+    width: 100px;
+    height: 100px;
+    background-color: #C4C4C4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.plus-icon {
+    font-size: 40px;
+    color: #000;
+    font-weight: 300;
+}
+
+.input-label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.back-button {
+    position: absolute;
+    left: 35%;
+    font-size: 24px;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: auto;
+}
+
