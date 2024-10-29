@@ -1,3 +1,9 @@
+.page-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 body {
     background-color: #F4F5F7;
 }
@@ -16,10 +22,11 @@ body {
     font-family: 'Sandoll GogoRound', sans-serif;
     font-size: 32px;
     font-weight: 400;
-    line-height: 32px;  
+    line-height: 32px;
     text-align: center;
     color: #000000;
 }
+
 .page-title {
     font-family: 'Pretendard', sans-serif;
     font-weight: 700;
@@ -32,9 +39,8 @@ body {
     justify-content: center;
 }
 
-.form-container {
+/* .form-container {
     width: 355px;
-    height: 33;
     margin: 0 auto;
     padding: 20px;
     border-radius: 8px;
@@ -43,13 +49,15 @@ body {
     gap: 16px;
     align-items: center;
     box-sizing: border-box;
-}
-.input-group {
+} */
+
+/* .input-group {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
-}
+} */
+
 .input-group label {
     font-family: 'Pretendard', sans-serif;
     font-size: 15px;
@@ -57,6 +65,7 @@ body {
     line-height: 17.9px;
     color: #000000;
 }
+
 .input-group input {
     width: 100%;
     padding: 10px;
@@ -65,6 +74,7 @@ body {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 .helper-text {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -81,10 +91,6 @@ body {
     font-family: 'Pretendard', sans-serif;
     font-weight: 700;
     font-size: 14px;
-    gap: 0px;
-    opacity: 0px;
-
-    font-size: 15px;
     font-weight: 700;
     text-align: center;
     border: none;
@@ -148,3 +154,73 @@ body {
     margin-right: auto;
 }
 
+
+
+/* 폼, 버튼 등의 공통 스타일 */
+.form-container {
+    width: 355px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.input-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.helper-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #FF0000;
+}
+
+.submitButton {
+    width: 100%;
+    height: 37px;
+    background-color: #ACA0EB;
+    color: #FFFFFF;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.bottomButton {
+    width: 100%;
+    height: 30px;
+    background-color: #F4F5F7;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
