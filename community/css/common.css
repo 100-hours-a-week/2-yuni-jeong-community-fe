@@ -9,14 +9,14 @@ body {
 }
 
 .community-header {
-    height: 104px;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 104px;
     border-bottom: 1px solid #000;
     background-color: #F4F5F7;
-    padding: 0 25%;
-    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
 }
 
 .community-title {
@@ -48,15 +48,6 @@ body {
     line-height: 17.9px;
     color: #000000;
 }
-
-/* .input-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-} */
 
 .helper-text {
     font-family: 'Inter', sans-serif;
@@ -96,13 +87,8 @@ body {
 
 
 .back-button {
-    /* position: absolute;
+    position: absolute;
     left: 25%;
-    font-size: 24px;
-    color: #000000;
-    text-decoration: none;
-    cursor: pointer;
-    margin-right: auto; */
     font-size: 24px;
     color: #000000;
     text-decoration: none;
@@ -182,6 +168,7 @@ body {
 }
 
 .user-profile {
+    position: absolute;
     width: 36px;
     height: 36px;
     right: 25%;
