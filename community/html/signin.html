@@ -19,7 +19,7 @@
     
             <div class="input-group">
                 <label for="profilePhoto" class="input-label">프로필 사진</label>
-                <span class="helper-text">* helper text</span>
+                <span class="helper-text" id="profilePhotoHelper">*프로필 사진을 업로드해주세요.</span>
                 <div class="profile-photo-container">
                     <input type="file" id="profilePhoto" accept="image/*" style="display: none;">
                     <label for="profilePhoto" class="profile-photo">
@@ -31,25 +31,29 @@
             <div class="input-group">
                 <label for="email">이메일*</label>
                 <input type="email" id="email" placeholder="이메일을 입력하세요">
-                <span class="helper-text">* helper text</span>
+                <span class="helper-text"></span>
             </div>
+    
             <div class="input-group">
                 <label for="password">비밀번호*</label>
                 <input type="password" id="password" placeholder="비밀번호를 입력하세요">
-                <span class="helper-text">* helper text</span>
+                <span class="helper-text"></span>
             </div>
+    
             <div class="input-group">
                 <label for="passwordConfirm">비밀번호 확인*</label>
                 <input type="password" id="passwordConfirm" placeholder="비밀번호를 한번 더 입력하세요">
-                <span class="helper-text">* helper text</span>
+                <span class="helper-text"></span>
             </div>
+    
             <div class="input-group">
-                <label for="nicknam">닉네임*</label>
-                <input type="nickname" id="nickname" placeholder="닉네임을 입력하세요">
-                <span class="helper-text">* helper text</span>
+                <label for="nickname">닉네임*</label>
+                <input type="text" id="nickname" placeholder="닉네임을 입력하세요">
+                <span class="helper-text">*닉네임을 입력해주세요.</span>
             </div>
-            <button class="submitButton">회원가입</button>
+            <button class="submitButton" id="registerButton" disabled>회원가입</button>
             <button class="bottomButton">로그인하러 가기</button>
         </div>
+        <script src="../js/validation.js"></script>
     </div>
 </body>
