@@ -12,6 +12,9 @@
         <a href="login.html" class="back-button">&lt;</a>
         <h1 class="community-title">아무 말 대잔치</h1>
     </header>
+
+    <div class="header-divider"></div> 
+
     <div class="page-container">
         <div class="page-title">회원가입</div>
 
@@ -51,8 +54,8 @@
                 <input type="text" id="nickname" placeholder="닉네임을 입력하세요">
                 <span class="helper-text">*닉네임을 입력해주세요.</span>
             </div>
-            <button class="submitButton" id="registerButton" disabled>회원가입</button>
-            <button class="bottomButton">로그인하러 가기</button>
+            <button class="submitButton" id="registerButton" disabled onclick="location.href='/'">회원가입</button>
+            <button class="bottomButton" onclick="location.href='/'">로그인하러 가기</button>
         </div>
         <script src="/js/validation.js"></script>
     </div>
