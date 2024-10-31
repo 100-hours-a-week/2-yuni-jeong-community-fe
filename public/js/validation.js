@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loginButton?.addEventListener("click", function (e) {
         e.preventDefault();
         if (validateEmail() && validatePassword()) {
-            window.location.href = "/posts"; // Posts 페이지로 이동
+            window.location.href = "/posts";
         }
     });
 

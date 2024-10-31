@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch('/data/posts.json');
             const posts = await response.json();
 
-            posts.forEach(post => {
+            posts.forEach((post) => {
                 const postItem = document.createElement('div');
                 postItem.classList.add('post-item');
+                postItem.style.cursor = "pointer";
                 postItem.innerHTML = `
                     <div class="post-title">${post.title}</div>
                     <div class="post-info-container">
@@ -25,6 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="post-author-name">${post.author}</div>
                     </div>
                 `;
+
+                postItem.addEventListener("click", () => {
+                    window.location.href = `/post?id=${post.id}`;
+                });
+
                 postListContainer.appendChild(postItem);
             });
         } catch (error) {
