@@ -1,0 +1,35 @@
+
+.saveChangesButton {
+    width: auto;
+    height: 46px;
+    padding: 0 20px;
+    background-color: #ACA0EB;
+    color: #FFFFFF;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 46px;
+}
+
+.saveChangesButton:enabled {
+    background-color: #7F6AEE;
+}
+.saveChangesButton:disabled {
+    background-color: #ACA0EB;
+    cursor: not-allowed;
+}
+
+.email-display {
+    width: 100%;
+    padding: 10px 0 0 0;
+    font-size: 15px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000000;
+    background-color: #F4F5F7;
+    border: none;
+    box-sizing: border-box;
+}

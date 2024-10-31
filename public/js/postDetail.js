@@ -28,6 +28,26 @@ document.addEventListener("DOMContentLoaded", async function () {
                 editButton.addEventListener("click", () => {
                     window.location.href = `/post/edit?id=${postId}`;
                 });
+
+                const deleteButton = document.querySelector(".delete-button");
+                const deleteModal = document.getElementById("deleteModal");
+                const cancelButton = document.getElementById("cancelButton");
+                const confirmButton = document.getElementById("confirmButton");
+
+                deleteButton.addEventListener("click", () => {
+                    deleteModal.style.display = "flex";
+                });
+
+                cancelButton.addEventListener("click", () => {
+                    deleteModal.style.display = "none";
+                });
+
+                
+                confirmButton.addEventListener("click", () => {
+                    alert("게시글이 삭제되었습니다.");
+                    deleteModal.style.display = "none";
+                    window.location.href = "/posts";
+                });
             } else {
                 console.error("Post not found for ID:", postId);
                 document.querySelector(".post-content").textContent = "게시글을 찾을 수 없습니다.";
