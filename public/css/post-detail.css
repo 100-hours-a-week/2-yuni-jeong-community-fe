@@ -187,6 +187,12 @@
     margin-top: 5px;
 }
 
+.comment-submit-button:disabled {
+    background-color: #ACA0EB;
+    cursor: not-allowed;
+}
+
+
 /* 댓글 리스트 */
 .comment-list {
     display: flex;
