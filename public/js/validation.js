@@ -101,14 +101,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 2000);
     }
 
-    // 비밀번호 수정 버튼 클릭 시
-    changePasswordButton?.addEventListener("click", function (e) {
-        e.preventDefault();
-        if (validatePassword() && validatePasswordConfirm()) {
-            showToastMessage("수정 완료");
-            // 실제 비밀번호 수정 로직 추가
-        }
-    });
+    if (changePasswordButton && changePasswordButton.classList.contains("change-password-page")) {
+        changePasswordButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (validatePassword() && validatePasswordConfirm()) {
+                showToastMessage("수정 완료");
+                // 실제 비밀번호 수정 로직 추가
+            }
+        });
+    }
+
 
     function validateNickname() {
         if (!nicknameInput) return true;
@@ -172,6 +174,13 @@ document.addEventListener("DOMContentLoaded", function () {
             return true;
         }
     }
+
+    loginButton?.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (validateEmail() && validatePassword()) {
+            window.location.href = "/posts"; // Posts 페이지로 이동
+        }
+    });
 
     // 버튼 상태 업데이트 함수
     function updateActionButtonState() {

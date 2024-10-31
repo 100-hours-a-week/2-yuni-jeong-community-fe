@@ -1,0 +1,255 @@
+.page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 제목 */
+.post-title {
+    max-width: 544px;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* 작성자 정보 */
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 544px;
+    margin-bottom: 8px;
+}
+
+.post-author-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+}
+
+.post-author-name {
+    font-family: Pretendard;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 0 10px 0 0;
+}
+
+.post-date {
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+    /* margin-left: auto; */
+}
+
+.post-actions {
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+}
+
+.edit-button, .delete-button {
+    width: 50px;
+    height: 27px;
+    border: 1px solid #ACA0EB;
+    background-color: transparent;
+    color: #000;
+    font-family: Pretendard;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius:10px;
+
+}
+
+/* 구분선 */
+.post-divider {
+    width: 592px;
+    height: 1px;
+    background-color: #E0E0E0;
+    margin: 8px 0;
+}
+
+/* 이미지 */
+.post-image-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.post-image {
+    width: 100%;
+    max-width: 544px;
+    height: 306px;
+    background-color: #D9D9D9;
+    margin: 16px 0;
+}
+
+/* 게시글 내용 */
+.post-content {
+    width: 100%;
+    max-width: 544px;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 21.15px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* 좋아요, 조회수, 댓글 */
+.post-stats {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+    max-width: 330px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.stat-item {
+    background-color: #D9D9D9;
+    padding: 10px;
+    border-radius: 16px;
+    text-align: center;
+    width: 116px;
+}
+
+.stat-number {
+    display: block;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.stat-text {
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* 댓글 입력 폼 */
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    width: 576px;
+    max-width: 560px;
+    border-radius: 16px;
+    background-color: #FFFFFF;
+    padding: 16px;
+    gap: 8px;
+    margin: 20px;
+}
+
+.comment-input {
+    width: 100%;
+    height: 94px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-weight: 400;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.comment-input::placeholder {
+    color: #000;
+}
+
+.comment-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #E0E0E0;
+}
+
+.comment-submit-button {
+    align-self: flex-end;
+    width: 138px;
+    height: 39px;
+    background-color: #ACA0EB;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+/* 댓글 리스트 */
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 544px;
+    margin-top: 20px;
+}
+
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.comment-author-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    margin-right: 5px;
+    
+}
+
+.comment-content {
+    /* display: flex;
+    flex-direction: column; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.comment-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.comment-author-name {
+    font-family: Pretendard;
+    width: 80px;
+    font-size: 15px;
+    font-weight: 700;
+    padding-right: 10px;
+}
+
+.comment-date {
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: auto;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 5px;
+}
+
+
+.comment-text {
+    font-family: Pretendard;
+    font-size: 15px;
+    font-weight: 400;
+}
