@@ -137,10 +137,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!profilePhotoInput) return true;
 
         if (!profilePhotoInput.value) {
-            profilePhotoHelper.style.display = "block";
+            if (profilePhotoHelper) {
+                profilePhotoHelper.style.display = "block";
+            }
             return false;
         } else {
-            profilePhotoHelper.style.display = "none";
+            if (profilePhotoHelper) {
+                profilePhotoHelper.style.display = "none";
+            }
             return true;
         }
     }
@@ -175,10 +179,52 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    loginButton?.addEventListener("click", function (e) {
+    loginButton?.addEventListener("click", async function (e) {
         e.preventDefault();
         if (validateEmail() && validatePassword()) {
-            window.location.href = "/posts";
+            try {
+                const response = await fetch('/data/users.json');
+                const users = await response.json();
+                const email = emailInput.value;
+                const password = passwordInput.value;
+                const user = users.find(u => u.email === email && u.password === password);
+
+                if (user) {
+                    showToastMessage("로그인 성공");
+                    setTimeout(() => {
+                        window.location.href = "/posts";
+                    }, 500);
+                } else {
+                    showToastMessage("이메일 또는 비밀번호가 잘못되었습니다.");
+                }
+            } catch (error) {
+                console.error("Login error:", error);
+                showToastMessage("로그인에 실패했습니다.");
+            }
+        }
+    });
+
+    registerButton?.addEventListener("click", async function (e) {
+        e.preventDefault();
+        if (validateEmail() && validatePassword() && validatePasswordConfirm() && validateNickname()) {
+            try {
+                const response = await fetch('/data/users.json');
+                const users = await response.json();
+                const email = emailInput.value;
+                const existingUser = users.find(u => u.email === email);
+
+                if (existingUser) {
+                    showToastMessage("이미 사용 중인 이메일입니다.");
+                    return;
+                }
+                showToastMessage("회원가입이 완료되었습니다!");
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 1000);
+            } catch (error) {
+                console.error("Registration error:", error);
+                showToastMessage("회원가입에 실패했습니다.");
+            }
         }
     });
 
@@ -186,15 +232,24 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateActionButtonState() {
         const isLogin = !!loginButton;
         const isSignup = !!registerButton;
-
+    
         const isValidEmail = validateEmail();
         const isValidPassword = validatePassword();
-
-        const isFormValid =
-            isValidEmail && isValidPassword &&
-            (isSignup ? validatePasswordConfirm() && validateNickname() && validateProfilePhoto() : true);
-
+        const isValidNickname = validateNickname();
+        const isValidPasswordConfirm = validatePasswordConfirm();
+        
+        const isValidProfilePhoto = true;
+    
+        let isFormValid = false;
+    
+        if (isSignup) {
+            isFormValid = isValidEmail && isValidPassword && isValidPasswordConfirm && isValidNickname && isValidProfilePhoto;
+        } else if (isLogin) {
+            isFormValid = isValidEmail && isValidPassword;
+        }
+    
         const actionButton = isSignup ? registerButton : loginButton;
+    
         if (actionButton) {
             actionButton.disabled = !isFormValid;
             actionButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
