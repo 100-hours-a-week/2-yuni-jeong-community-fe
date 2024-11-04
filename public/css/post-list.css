@@ -34,7 +34,7 @@
     height: 39px;
     background-color: #ACA0EB;
     color: #FFFFFF;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 16px;
     font-weight: 700;
     line-height: 25.04px;
@@ -75,7 +75,7 @@
 .post-info-left {
     display: flex;
     gap: 10px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 14px;
     font-weight: 400;
     line-height: 18.2px;
@@ -83,7 +83,7 @@
 }
 
 .post-info-right {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Regular';
     font-size: 14px;
     font-weight: 400;
     line-height: 18.2px;
@@ -112,7 +112,7 @@
 }
 
 .post-author-name {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 15px;
     font-weight: 700;
     line-height: 19.5px;

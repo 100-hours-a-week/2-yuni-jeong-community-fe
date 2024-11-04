@@ -10,7 +10,7 @@
 /* 제목 */
 .post-title {
     max-width: 544px;
-    font-family: Pretendard;
+    font-family: 'Pretendard-Bold';
     font-size: 24px;
     font-weight: 700;
     width: 100%;
@@ -35,14 +35,14 @@
 }
 
 .post-author-name {
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular';
     font-size: 15px;
     font-weight: 700;
     padding: 0 10px 0 0;
 }
 
 .post-date {
-    font-family: Pretendard;
+    font-family: 'Pretendard-Medium';
     font-size: 14px;
     font-weight: 400;
     color: #666;
@@ -61,7 +61,7 @@
     border: 1px solid #ACA0EB;
     background-color: transparent;
     color: #000;
-    font-family: Pretendard;
+    font-family: 'Pretendard-Medium';
     font-size: 14px;
     cursor: pointer;
     border-radius:10px;
@@ -95,7 +95,7 @@
 .post-content {
     width: 100%;
     max-width: 544px;
-    font-family: Pretendard;
+    font-family: 'Pretendard-Medium';
     font-size: 15px;
     font-weight: 400;
     line-height: 21.15px;
@@ -124,14 +124,14 @@
 
 .stat-number {
     display: block;
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular';
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 4px;
 }
 
 .stat-text {
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular';
     font-size: 16px;
     font-weight: 700;
 }
@@ -155,7 +155,7 @@
     padding: 10px;
     border-radius: 8px;
     border: none;
-    font-family: Pretendard;
+    font-family: 'Pretendard-Light';
     font-size: 15px;
     font-weight: 400;
     resize: none;
@@ -180,7 +180,7 @@
     color: #fff;
     border: none;
     border-radius: 16px;
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular';
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
@@ -234,7 +234,7 @@
 }
 
 .comment-author-name {
-    font-family: Pretendard;
+    font-family: 'Pretendard-Medium';
     width: 80px;
     font-size: 15px;
     font-weight: 700;
@@ -242,7 +242,7 @@
 }
 
 .comment-date {
-    font-family: Pretendard;
+    font-family: 'Pretendard-Light';
     font-size: 14px;
     font-weight: 400;
     margin-right: auto;
@@ -255,7 +255,7 @@
 
 
 .comment-text {
-    font-family: Pretendard;
+    font-family: 'Pretendard-Medium';
     font-size: 15px;
     font-weight: 400;
 }

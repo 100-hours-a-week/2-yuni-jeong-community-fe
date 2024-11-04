@@ -20,7 +20,8 @@ body {
 }
 
 .community-title {
-    font-family: 'Sandoll GogoRound', sans-serif;
+    font-family: "DNFBitBitv2";
+    font-weight: 400;   
     font-size: 32px;
     font-weight: 400;
     line-height: 32px;
@@ -36,7 +37,7 @@ body {
 }
 
 .page-title {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-weight: 700;
     font-size: 32px;
     text-align: center;
@@ -46,14 +47,14 @@ body {
 }
 
 .input-group label {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 15px;
     font-weight: 700;
     color: #000000;
 }
 
 .helper-text {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Pretendard-Light';
     font-weight: 400;
     font-size: 12px;
     line-height: 14.52px;
@@ -65,7 +66,7 @@ body {
     height: 37px;
     background-color: #ACA0EB;
     color: #FFFFFF;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-weight: 700;
     font-size: 14px;
     font-weight: 700;
@@ -79,7 +80,7 @@ body {
     width: 100%;
     height: 30px;
     background-color: #F4F5F7;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 14px;
     font-weight: 400;
     text-align: center;
@@ -136,7 +137,7 @@ body {
 }
 
 .input-group label {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 15px;
     font-weight: 700;
     color: #000000;
@@ -153,7 +154,7 @@ body {
 }
 
 .helper-text {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Pretendard-Light';
     font-weight: 400;
     font-size: 12px;
     color: #FF0000;
@@ -165,7 +166,7 @@ body {
     height: 37px;
     background-color: #ACA0EB;
     color: #FFFFFF;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-weight: 700;
     font-size: 15px;
     text-align: center;
@@ -187,7 +188,7 @@ body {
     width: 100%;
     height: 30px;
     background-color: #F4F5F7;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 14px;
     font-weight: 400;
     text-align: center;
@@ -210,7 +211,7 @@ body {
 
 .dropdown-item {
     padding: 10px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 14px;
     color: #000;
     cursor: pointer;

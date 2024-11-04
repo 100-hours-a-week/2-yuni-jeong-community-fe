@@ -13,7 +13,7 @@
 }
 
 .input-group label {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 15px;
     font-weight: 700;
     color: #000000;
@@ -66,7 +66,7 @@
     height: 29px;
     background-color: #D9D9D9;
     color: #000;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 14px;
     font-weight: 400;
     line-height: 16.71px;
@@ -78,7 +78,7 @@
 
 
 .file-upload-text {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     width: 116px;
     height: px;
     font-size: 14px;
@@ -93,7 +93,7 @@
     height: 33px;
     background-color: #ACA0EB;
     color: #FFFFFF;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Pretendard-Medium';
     font-size: 16px;
     font-weight: 700;
     border: none;
