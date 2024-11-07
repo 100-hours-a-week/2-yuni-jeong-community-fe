@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const changePasswordButton = document.querySelector(".submitButton");
 
     // 로그인/회원가입 유효성 검사 함수
-    function validateEmail() {
+    const validateEmail = () => {
         const emailValue = emailInput?.value.trim();
         const emailHelper = emailInput?.nextElementSibling;
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function validatePassword() {
+    const validatePassword = () => {
         const passwordValue = passwordInput?.value.trim();
         const passwordHelper = passwordInput?.nextElementSibling;
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 회원가입 유효성 검사 함수들
-    function validatePasswordConfirm() {
+    const validatePasswordConfirm = () => {
         if (!passwordConfirmInput) return true;
 
         const passwordConfirmValue = passwordConfirmInput.value.trim();
@@ -76,24 +76,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 비밀번호 수정 페이지 전용 버튼 활성화 상태 업데이트
-    function updateChangePasswordButtonState() {
+    const updateChangePasswordButtonState = () => {
         const isValid = validatePassword() && validatePasswordConfirm();
         changePasswordButton.disabled = !isValid;
         changePasswordButton.style.backgroundColor = isValid ? "#7F6AEE" : "#ACA0EB";
     }
 
     // 비밀번호 수정 성공 시 토스트 메시지 표시
-    function showToastMessage(message) {
+    const showToastMessage = (message) => {
         const toast = document.createElement("div");
         toast.textContent = message;
-        toast.style.position = "fixed";
-        toast.style.bottom = "20px";
-        toast.style.left = "50%";
-        toast.style.transform = "translateX(-50%)";
-        toast.style.padding = "10px 20px";
-        toast.style.backgroundColor = "#242424";
-        toast.style.color = "#fff";
-        toast.style.borderRadius = "5px";
+        Object.assign(toast.style, {
+            position: "fixed",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "10px 20px",
+            backgroundColor: "#242424",
+            color: "#fff",
+            borderRadius: "5px"
+        });
         document.body.appendChild(toast);
         
         setTimeout(() => {
@@ -112,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function validateNickname() {
+    const validateNickname = () => {
         if (!nicknameInput) return true;
 
         const nicknameValue = nicknameInput.value.trim();
@@ -133,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function validateProfilePhoto() {
+    const validateProfilePhoto = () => {
         if (!profilePhotoInput) return true;
 
         if (!profilePhotoInput.value) {
@@ -150,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 게시글 작성 유효성 검사 함수들
-    function validateTitle() {
+    const validateTitle = () => {
         if (!titleInput) return true;
 
         const titleLength = titleInput.value.length;
@@ -166,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function validateContent() {
+    const validateContent = () => {
         if (!contentInput) return true;
 
         const contentLength = contentInput.value.length;
@@ -191,9 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (user) {
                     showToastMessage("로그인 성공");
-                    setTimeout(() => {
-                        window.location.href = "/posts";
-                    }, 500);
+                    setTimeout(() => window.location.href = "/posts", 500);
                 } else {
                     showToastMessage("이메일 또는 비밀번호가 잘못되었습니다.");
                 }
@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    registerButton?.addEventListener("click", async function (e) {
+    registerButton?.addEventListener("click", async (e) => {
         e.preventDefault();
         if (validateEmail() && validatePassword() && validatePasswordConfirm() && validateNickname()) {
             try {
@@ -218,9 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
                 showToastMessage("회원가입이 완료되었습니다!");
-                setTimeout(() => {
-                    window.location.href = "/";
-                }, 1000);
+                setTimeout(() => window.location.href = "/", 1000);
             } catch (error) {
                 console.error("Registration error:", error);
                 showToastMessage("회원가입에 실패했습니다.");
@@ -229,46 +227,58 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 버튼 상태 업데이트 함수
-    function updateActionButtonState() {
+    const updateActionButtonState = () => {
         const isLogin = !!loginButton;
         const isSignup = !!registerButton;
-    
-        const isValidEmail = validateEmail();
-        const isValidPassword = validatePassword();
-        const isValidNickname = validateNickname();
-        const isValidPasswordConfirm = validatePasswordConfirm();
-        
-        const isValidProfilePhoto = true;
-    
-        let isFormValid = false;
-    
-        if (isSignup) {
-            isFormValid = isValidEmail && isValidPassword && isValidPasswordConfirm && isValidNickname && isValidProfilePhoto;
-        } else if (isLogin) {
-            isFormValid = isValidEmail && isValidPassword;
-        }
-    
+        const isFormValid = isSignup
+            ? validateEmail() && validatePassword() && validatePasswordConfirm() && validateNickname()
+            : validateEmail() && validatePassword();
+
         const actionButton = isSignup ? registerButton : loginButton;
-    
         if (actionButton) {
             actionButton.disabled = !isFormValid;
             actionButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
         }
-    }
+    };
+    // function updateActionButtonState() {
+    //     const isLogin = !!loginButton;
+    //     const isSignup = !!registerButton;
+    
+    //     const isValidEmail = validateEmail();
+    //     const isValidPassword = validatePassword();
+    //     const isValidNickname = validateNickname();
+    //     const isValidPasswordConfirm = validatePasswordConfirm();
+        
+    //     const isValidProfilePhoto = true;
+    
+    //     let isFormValid = false;
+    
+    //     if (isSignup) {
+    //         isFormValid = isValidEmail && isValidPassword && isValidPasswordConfirm && isValidNickname && isValidProfilePhoto;
+    //     } else if (isLogin) {
+    //         isFormValid = isValidEmail && isValidPassword;
+    //     }
+    
+    //     const actionButton = isSignup ? registerButton : loginButton;
+    
+    //     if (actionButton) {
+    //         actionButton.disabled = !isFormValid;
+    //         actionButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
+    //     }
+    // }
 
-    function updateSubmitButtonState() {
+    const updateSubmitButtonState = () =>  {
         if (!submitButton) return;
 
         const isFormValid = validateTitle() && validateContent();
         submitButton.disabled = !isFormValid;
         submitButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
-    }
+    };
 
     // 이벤트 리스너 추가
-    emailInput?.addEventListener("input", updateActionButtonState);
-    passwordInput?.addEventListener("input", updateActionButtonState);
-    passwordConfirmInput?.addEventListener("input", updateActionButtonState);
-    nicknameInput?.addEventListener("input", updateActionButtonState);
+    [emailInput, passwordInput, passwordConfirmInput, nicknameInput].forEach(input =>
+        input?.addEventListener("input", updateActionButtonState)
+    );
     profilePhotoInput?.addEventListener("change", updateActionButtonState);
     titleInput?.addEventListener("input", updateSubmitButtonState);
     contentInput?.addEventListener("input", updateSubmitButtonState);
@@ -276,39 +286,59 @@ document.addEventListener("DOMContentLoaded", function () {
     passwordConfirmInput?.addEventListener("input", updateChangePasswordButtonState);
 
     // 프로필 사진 업로드 이벤트 (회원가입 전용)
-    if (profilePhotoInput) {
-        profilePhotoInput.addEventListener("change", function () {
-            const file = profilePhotoInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    profilePhotoContainer.style.backgroundImage = `url(${e.target.result})`;
-                    profilePhotoContainer.style.backgroundSize = "cover";
-                    profilePhotoContainer.style.backgroundPosition = "center";
-                    plusIcon.style.display = "none";
-                    profilePhotoHelper.style.display = "none";
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+    // if (profilePhotoInput) {
+    //     profilePhotoInput.addEventListener("change", function () {
+    //         const file = profilePhotoInput.files[0];
+    //         if (file) {
+    //             const reader = new FileReader();
+    //             reader.onload = function (e) {
+    //                 profilePhotoContainer.style.backgroundImage = `url(${e.target.result})`;
+    //                 profilePhotoContainer.style.backgroundSize = "cover";
+    //                 profilePhotoContainer.style.backgroundPosition = "center";
+    //                 plusIcon.style.display = "none";
+    //                 profilePhotoHelper.style.display = "none";
+    //             };
+    //             reader.readAsDataURL(file);
+    //         }
+    //     });
 
-        profilePhotoContainer.addEventListener("click", function () {
-            if (profilePhotoInput.value) {
-                profilePhotoInput.value = "";
-                profilePhotoContainer.style.backgroundImage = "none";
-                plusIcon.style.display = "flex";
-                profilePhotoHelper.style.display = "block";
-            }
-        });
-    }
+    //     profilePhotoContainer.addEventListener("click", function () {
+    //         if (profilePhotoInput.value) {
+    //             profilePhotoInput.value = "";
+    //             profilePhotoContainer.style.backgroundImage = "none";
+    //             plusIcon.style.display = "flex";
+    //             profilePhotoHelper.style.display = "block";
+    //         }
+    //     });
+    // }
+    profilePhotoInput?.addEventListener("change", () => {
+        const file = profilePhotoInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                profilePhotoContainer.style.backgroundImage = `url(${e.target.result})`;
+                profilePhotoContainer.style.backgroundSize = "cover";
+                profilePhotoContainer.style.backgroundPosition = "center";
+                plusIcon.style.display = "none";
+                profilePhotoHelper.style.display = "none";
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    profilePhotoContainer?.addEventListener("click", () => {
+        profilePhotoInput.value = "";
+        profilePhotoContainer.style.backgroundImage = "none";
+        plusIcon.style.display = "flex";
+        profilePhotoHelper.style.display = "block";
+    });
 
     // 게시글 작성 완료 버튼 클릭 시 필수 입력 확인
-    submitButton?.addEventListener("click", function (e) {
+    submitButton?.addEventListener("click", (e) => {
         e.preventDefault();
         if (!validateTitle() || !validateContent()) {
             alert("*제목과 내용을 모두 작성해주세요.");
         } else {
-            // 여기에 게시글 등록 로직 추가
             console.log("제목:", titleInput.value);
             console.log("내용:", contentInput.value);
         }
