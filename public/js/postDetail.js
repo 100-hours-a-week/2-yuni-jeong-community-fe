@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         try {
             const postResponse = await fetch('/data/posts.json');
             const posts = await postResponse.json();
-            const post = posts.find(p => p.id == postId);
+            const post = posts.find(p => p.post_id == postId);
 
             if (post) {
                 document.querySelector(".post-title").textContent = post.title;
@@ -22,7 +22,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 document.querySelector(".post-content").textContent = post.content;
                 document.getElementById("likes-count").textContent = formatNumber(post.likes);
                 document.getElementById("views-count").textContent = formatNumber(post.views);
-                document.getElementById("comments-count").textContent = formatNumber(post.comments);
+                document.getElementById("comments-count").textContent = formatNumber(post.comments_count);
+
+                const postImageContainer = document.querySelector(".post-image");
+                if (post.image_url) {
+                    postImageContainer.style.backgroundImage = `url(${post.image_url})`;
+                    postImageContainer.style.display = "block";
+                }
 
                 const editButton = document.querySelector(".edit-button");
                 editButton.addEventListener("click", () => {
@@ -68,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <div class="comment-content">
                         <div class="comment-item-header">
                             <span class="comment-author-name">${comment.author}</span>
-                            <span class="comment-date">${comment.date}</span>
+                            <span class="comment-date">${new Date(comment.date).toLocaleString()}</span>
                         </div>
                         <p class="comment-text">${comment.content}</p>
                     </div>

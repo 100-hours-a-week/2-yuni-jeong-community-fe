@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="post-info-container">
                         <div class="post-info-left">
                             <span>좋아요 ${post.likes}</span>
-                            <span>댓글 ${post.comments}</span>
+                            <span>댓글 ${post.comments_count}</span>
                             <span>조회수 ${post.views}</span>
                         </div>
-                        <div class="post-info-right">${post.date}</div>
+                        <div class="post-info-right">${new Date(post.date).toLocaleString()}</div>
                     </div>
                     <div class="post-divider"></div>
                     <div class="post-author-container">
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 `;
 
                 postItem.addEventListener("click", () => {
-                    window.location.href = `/post?id=${post.id}`;
+                    window.location.href = `/post?id=${post.post_id}`;
                 });
 
                 postListContainer.appendChild(postItem);

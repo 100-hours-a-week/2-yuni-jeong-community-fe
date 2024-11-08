@@ -1,23 +1,25 @@
 [
     {
-        "id": 1,
+        "post_id": 1,
         "title": "안녕하세요~~",
         "author": "혜융",
-        "date": "2024-10-31 01:40:37",
+        "date": "2024-10-31T01:40:37",
         "likes": 10,
-        "comments": 2,
+        "comments_count": 2,
         "views": 1000,
-        "content": "저는 정혜윤입니다~~"
+        "content": "저는 정혜윤입니다~~",
+        "image_url": "/images/hiello.jpeg"
         
     },
     {
-        "id": 2,
+        "post_id": 2,
         "title": "바보",
         "author": "yuni",
-        "date": "2024-10-31 01:52:08",
+        "date": "2024-10-31T01:45:37",
         "likes": 2,
-        "comments": 1,
+        "comments_count": 1,
         "views": 24,
-        "content": "바다의 보배라는 뜻"
+        "content": "바다의 보배라는 뜻",
+        "image_url": null
     }
 ]
