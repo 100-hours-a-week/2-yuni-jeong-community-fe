@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             // JSON 파일에서 게시글 데이터 가져오기
             const response = await fetch('/data/posts.json');
             const posts = await response.json();
-            const post = posts.find(p => p.id == postId);
+            const post = posts.find(p => p.post_id == postId);
 
             if (post) {
                 // 제목과 내용을 가져와 입력 필드에 표시
