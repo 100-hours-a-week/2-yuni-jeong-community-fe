@@ -75,10 +75,43 @@ document.addEventListener("DOMContentLoaded", async function () {
                         <div class="comment-item-header">
                             <span class="comment-author-name">${comment.author}</span>
                             <span class="comment-date">${new Date(comment.date).toLocaleString()}</span>
+                            <div class="comment-actions">
+                                <button class="edit-button">수정</button>
+                                <button class="delete-button">삭제</button>
+                            </div>
                         </div>
                         <p class="comment-text">${comment.content}</p>
                     </div>
                 `;
+                
+                const editCommentButton = commentItem.querySelector(".edit-button");
+                const deleteCommentButton = commentItem.querySelector(".delete-button");
+
+                editCommentButton.addEventListener("click", () => {
+                    commentInput.value = comment.content;
+                    submitButton.textContent = "댓글 수정";
+                    submitButton.onclick = () => {
+                        comment.content = commentInput.value;
+                        commentItem.querySelector(".comment-text").textContent = comment.content;
+                        submitButton.textContent = "댓글 등록";
+                        commentInput.value = "";
+                    };
+                });
+
+                deleteCommentButton.addEventListener("click", () => {
+                    const commentDeleteModal = document.getElementById("commentDeleteModal");
+                    commentDeleteModal.style.display = "flex";
+
+                    document.getElementById("commentCancelButton").onclick = () => {
+                        commentDeleteModal.style.display = "none";
+                    };
+
+                    document.getElementById("commentConfirmButton").onclick = () => {
+                        commentDeleteModal.style.display = "none";
+                        commentItem.remove();
+                    };
+                });
+                
                 commentList.appendChild(commentItem);
             });
 
