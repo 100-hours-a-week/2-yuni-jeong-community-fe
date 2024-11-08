@@ -240,32 +240,6 @@ document.addEventListener("DOMContentLoaded", function () {
             actionButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
         }
     };
-    // function updateActionButtonState() {
-    //     const isLogin = !!loginButton;
-    //     const isSignup = !!registerButton;
-    
-    //     const isValidEmail = validateEmail();
-    //     const isValidPassword = validatePassword();
-    //     const isValidNickname = validateNickname();
-    //     const isValidPasswordConfirm = validatePasswordConfirm();
-        
-    //     const isValidProfilePhoto = true;
-    
-    //     let isFormValid = false;
-    
-    //     if (isSignup) {
-    //         isFormValid = isValidEmail && isValidPassword && isValidPasswordConfirm && isValidNickname && isValidProfilePhoto;
-    //     } else if (isLogin) {
-    //         isFormValid = isValidEmail && isValidPassword;
-    //     }
-    
-    //     const actionButton = isSignup ? registerButton : loginButton;
-    
-    //     if (actionButton) {
-    //         actionButton.disabled = !isFormValid;
-    //         actionButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
-    //     }
-    // }
 
     const updateSubmitButtonState = () =>  {
         if (!submitButton) return;
@@ -285,32 +259,6 @@ document.addEventListener("DOMContentLoaded", function () {
     passwordInput?.addEventListener("input", updateChangePasswordButtonState);
     passwordConfirmInput?.addEventListener("input", updateChangePasswordButtonState);
 
-    // 프로필 사진 업로드 이벤트 (회원가입 전용)
-    // if (profilePhotoInput) {
-    //     profilePhotoInput.addEventListener("change", function () {
-    //         const file = profilePhotoInput.files[0];
-    //         if (file) {
-    //             const reader = new FileReader();
-    //             reader.onload = function (e) {
-    //                 profilePhotoContainer.style.backgroundImage = `url(${e.target.result})`;
-    //                 profilePhotoContainer.style.backgroundSize = "cover";
-    //                 profilePhotoContainer.style.backgroundPosition = "center";
-    //                 plusIcon.style.display = "none";
-    //                 profilePhotoHelper.style.display = "none";
-    //             };
-    //             reader.readAsDataURL(file);
-    //         }
-    //     });
-
-    //     profilePhotoContainer.addEventListener("click", function () {
-    //         if (profilePhotoInput.value) {
-    //             profilePhotoInput.value = "";
-    //             profilePhotoContainer.style.backgroundImage = "none";
-    //             plusIcon.style.display = "flex";
-    //             profilePhotoHelper.style.display = "block";
-    //         }
-    //     });
-    // }
     profilePhotoInput?.addEventListener("change", () => {
         const file = profilePhotoInput.files[0];
         if (file) {

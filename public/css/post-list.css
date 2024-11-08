@@ -119,3 +119,33 @@
     color: #000;
     text-align: left;
 }
+
+.create-post-button {
+    width: 138px;
+    height: 39px;
+    background-color: #ACA0EB;
+    color: #FFFFFF;
+    font-family: 'Pretendard-Medium';
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 25.04px;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-post-button:hover {
+    background-color: #7F6AEE;
+}
+
+.post-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}

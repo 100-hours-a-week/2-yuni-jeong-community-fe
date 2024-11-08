@@ -1,15 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     const postListContainer = document.querySelector('.post-list-container');
+    let page = 1;
+    let loading = false;
 
     async function fetchPosts() {
         try {
             const response = await fetch('/data/posts.json');
+            // const response = await fetch(`/data/posts_page_${page}.json`);
             const posts = await response.json();
 
             posts.forEach((post) => {
                 const postItem = document.createElement('div');
                 postItem.classList.add('post-item');
                 postItem.style.cursor = "pointer";
+
+                const postTitle = post.title.length > 26 ? post.title.substring(0, 26) + '...' : post.title;
+
                 postItem.innerHTML = `
                     <div class="post-title">${post.title}</div>
                     <div class="post-info-container">
@@ -30,13 +36,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 postItem.addEventListener("click", () => {
                     window.location.href = `/post?id=${post.post_id}`;
                 });
-
                 postListContainer.appendChild(postItem);
             });
+
+            loading = false;
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
     }
 
-    fetchPosts();
+    window.addEventListener("scroll", () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
+            loading = true;
+            page += 1;
+            fetchPosts(page);
+        }
+    });
+
+    fetchPosts(page);
 });
