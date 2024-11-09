@@ -9,16 +9,28 @@ document.addEventListener("DOMContentLoaded", async function () {
         return num;
     }
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+    
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
     if (postId !== null) {
         try {
-            const postResponse = await fetch('/data/posts.json');
-            const posts = await postResponse.json();
-            const post = posts.find(p => p.post_id == postId);
+            const postResponse = await fetch(`http://localhost:8080/posts/${postId}`);
+            const { data: post } = await postResponse.json();
 
             if (post) {
                 document.querySelector(".post-title").textContent = post.title;
                 document.querySelector(".post-author-name").textContent = post.author;
-                document.querySelector(".post-date").textContent = post.date;
+                document.querySelector(".post-date").textContent = formatDate(post.date);
                 document.querySelector(".post-content").textContent = post.content;
                 document.getElementById("likes-count").textContent = formatNumber(post.likes);
                 document.getElementById("views-count").textContent = formatNumber(post.views);
@@ -55,7 +67,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                     window.location.href = "/posts";
                 });
             } else {
-                console.error("Post not found for ID:", postId);
                 document.querySelector(".post-content").textContent = "게시글을 찾을 수 없습니다.";
             }
 
@@ -74,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <div class="comment-content">
                         <div class="comment-item-header">
                             <span class="comment-author-name">${comment.author}</span>
-                            <span class="comment-date">${new Date(comment.date).toLocaleString()}</span>
+                            <span class="comment-date">${formatDate(comment.date)}</span>
                             <div class="comment-actions">
                                 <button class="edit-button">수정</button>
                                 <button class="delete-button">삭제</button>

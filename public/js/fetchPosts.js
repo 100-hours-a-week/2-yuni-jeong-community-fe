@@ -3,19 +3,31 @@ document.addEventListener("DOMContentLoaded", function () {
     let page = 1;
     let loading = false;
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+    
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
     async function fetchPosts() {
         try {
-            const response = await fetch('/data/posts.json');
-            // const response = await fetch(`/data/posts_page_${page}.json`);
-            const posts = await response.json();
-
+            const response = await fetch('http://localhost:8080/posts');
+            const { data: posts } = await response.json();
+    
             posts.forEach((post) => {
                 const postItem = document.createElement('div');
                 postItem.classList.add('post-item');
                 postItem.style.cursor = "pointer";
-
+    
                 const postTitle = post.title.length > 26 ? post.title.substring(0, 26) + '...' : post.title;
-
+    
                 postItem.innerHTML = `
                     <div class="post-title">${post.title}</div>
                     <div class="post-info-container">
@@ -24,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span>댓글 ${post.comments_count}</span>
                             <span>조회수 ${post.views}</span>
                         </div>
-                        <div class="post-info-right">${new Date(post.date).toLocaleString()}</div>
+                        <div class="post-info-right">${formatDate(post.date)}</div>
                     </div>
                     <div class="post-divider"></div>
                     <div class="post-author-container">
@@ -32,13 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="post-author-name">${post.author}</div>
                     </div>
                 `;
-
+    
                 postItem.addEventListener("click", () => {
                     window.location.href = `/post?id=${post.post_id}`;
                 });
                 postListContainer.appendChild(postItem);
             });
-
+    
             loading = false;
         } catch (error) {
             console.error("Error fetching posts:", error);
