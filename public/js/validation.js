@@ -185,17 +185,24 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         if (validateEmail() && validatePassword()) {
             try {
-                const response = await fetch('/data/users.json');
-                const users = await response.json();
-                const email = emailInput.value;
-                const password = passwordInput.value;
-                const user = users.find(u => u.email === email && u.password === password);
-
-                if (user) {
+                const response = await fetch('http://localhost:8080/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: emailInput.value,
+                        password: passwordInput.value
+                    })
+                });
+    
+                const result = await response.json();
+    
+                if (response.ok) {
                     showToastMessage("로그인 성공");
                     setTimeout(() => window.location.href = "/posts", 500);
                 } else {
-                    showToastMessage("이메일 또는 비밀번호가 잘못되었습니다.");
+                    showToastMessage(result.message);
                 }
             } catch (error) {
                 console.error("Login error:", error);
@@ -208,21 +215,46 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         if (validateEmail() && validatePassword() && validatePasswordConfirm() && validateNickname()) {
             try {
-                const response = await fetch('/data/users.json');
-                const users = await response.json();
-                const email = emailInput.value;
-                const existingUser = users.find(u => u.email === email);
-
-                if (existingUser) {
-                    showToastMessage("이미 사용 중인 이메일입니다.");
-                    return;
+                const response = await fetch('http://localhost:8080/users/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: emailInput.value,
+                        password: passwordInput.value,
+                        nickname: nicknameInput.value,
+                        profile_image: profilePhotoInput.value || ""
+                    })
+                });
+    
+                const result = await response.json();
+    
+                if (response.ok) {
+                    showToastMessage("회원가입이 완료되었습니다!");
+                    setTimeout(() => window.location.href = "/", 1000);
+                } else {
+                    showToastMessage(result.message);
                 }
-                showToastMessage("회원가입이 완료되었습니다!");
-                setTimeout(() => window.location.href = "/", 1000);
             } catch (error) {
                 console.error("Registration error:", error);
                 showToastMessage("회원가입에 실패했습니다.");
             }
+            //     const response = await fetch('/data/users.json');
+            //     const users = await response.json();
+            //     const email = emailInput.value;
+            //     const existingUser = users.find(u => u.email === email);
+
+            //     if (existingUser) {
+            //         showToastMessage("이미 사용 중인 이메일입니다.");
+            //         return;
+            //     }
+            //     showToastMessage("회원가입이 완료되었습니다!");
+            //     setTimeout(() => window.location.href = "/", 1000);
+            // } catch (error) {
+            //     console.error("Registration error:", error);
+            //     showToastMessage("회원가입에 실패했습니다.");
+            // }
         }
     });
 
