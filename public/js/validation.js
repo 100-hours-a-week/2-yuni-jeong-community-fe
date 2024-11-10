@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         if (validateEmail() && validatePassword()) {
             try {
-                const response = await fetch('http://localhost:8080/users/login', {
+                const response = await fetch('http://localhost:8080/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         if (validateEmail() && validatePassword() && validatePasswordConfirm() && validateNickname()) {
             try {
-                const response = await fetch('http://localhost:8080/users/signup', {
+                const response = await fetch('http://localhost:8080/auth/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
