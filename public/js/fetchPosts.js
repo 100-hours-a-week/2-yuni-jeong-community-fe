@@ -17,9 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function fetchPosts() {
+        if (loading) return;
+        loading = true;
         try {
-            const response = await fetch('http://localhost:8080/posts');
+            const response = await fetch(`http://localhost:8080/posts?page=${page}`);
             const { data: posts } = await response.json();
+
+            if (posts.length === 0) {
+                loading = false;
+                return;
+            }
     
             posts.forEach((post) => {
                 const postItem = document.createElement('div');
@@ -50,20 +57,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 postListContainer.appendChild(postItem);
             });
-    
+
+            page += 1;
             loading = false;
         } catch (error) {
             console.error("Error fetching posts:", error);
+            loading = false;
         }
     }
 
     window.addEventListener("scroll", () => {
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
-            loading = true;
-            page += 1;
-            fetchPosts(page);
+            fetchPosts();
         }
     });
 
-    fetchPosts(page);
+    fetchPosts();
 });
