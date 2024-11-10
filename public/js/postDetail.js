@@ -69,10 +69,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             } else {
                 document.querySelector(".post-content").textContent = "게시글을 찾을 수 없습니다.";
             }
-
-            const commentResponse = await fetch('/data/comments.json');
-            const commentsData = await commentResponse.json();
-            const comments = commentsData[postId] || [];
+            const commentResponse = await fetch(`http://localhost:8080/posts/${postId}/comments`);
+            const { data: comments } = await commentResponse.json();
 
             const commentList = document.querySelector('.comment-list');
             commentList.innerHTML = "";
