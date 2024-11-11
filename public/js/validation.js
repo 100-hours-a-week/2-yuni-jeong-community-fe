@@ -298,50 +298,40 @@ document.addEventListener("DOMContentLoaded", function () {
         profilePhotoHelper.style.display = "block";
     });
 
+
     // 게시글 작성 완료 버튼 클릭 시 필수 입력 확인
-    submitButton?.addEventListener("click", (e) => {
+    submitButton?.addEventListener("click", async (e) => {
         e.preventDefault();
         if (!validateTitle() || !validateContent()) {
             alert("*제목과 내용을 모두 작성해주세요.");
         } else {
-            console.log("제목:", titleInput.value);
-            console.log("내용:", contentInput.value);
+            try {
+                const response = await fetch('http://localhost:8080/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: titleInput.value,
+                        content: contentInput.value,
+                        user_id: 1, // TODO : 현재 로그인한 유저 불러오게 수정
+                        image_url: ""
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showToastMessage("게시글이 등록되었습니다!");
+                    setTimeout(() => window.location.href = "/posts", 1000);
+                } else {
+                    showToastMessage(result.message);
+                }
+            } catch (error) {
+                console.error("Error posting article:", error);
+                showToastMessage("게시글 등록에 실패했습니다.");
+            }
         }
     });
-
-    // 게시글 작성 완료 버튼 클릭 시 필수 입력 확인
-submitButton?.addEventListener("click", async (e) => {
-    e.preventDefault();
-    if (!validateTitle() || !validateContent()) {
-        alert("*제목과 내용을 모두 작성해주세요.");
-    } else {
-        try {
-            const response = await fetch('http://localhost:8080/posts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: titleInput.value,
-                    content: contentInput.value,
-                    user_id: 1, // TODO : 현재 로그인한 유저 불러오게 수정
-                    image_url: ""
-                })
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                showToastMessage("게시글이 등록되었습니다!");
-                setTimeout(() => window.location.href = "/posts", 1000);
-            } else {
-                showToastMessage(result.message);
-            }
-        } catch (error) {
-            console.error("Error posting article:", error);
-            showToastMessage("게시글 등록에 실패했습니다.");
-        }
-    }
-});
 
 });
