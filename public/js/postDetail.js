@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             };
         });
 
+        // 댓글 삭제
         deleteCommentButton.addEventListener("click", () => {
             const commentDeleteModal = document.getElementById("commentDeleteModal");
             commentDeleteModal.style.display = "flex";
@@ -127,9 +128,25 @@ document.addEventListener("DOMContentLoaded", async () => {
                 commentDeleteModal.style.display = "none";
             };
 
-            document.getElementById("commentConfirmButton").onclick = () => {
+            document.getElementById("commentConfirmButton").onclick = async () => {
                 commentDeleteModal.style.display = "none";
-                commentItem.remove();
+
+                try {
+                    const response = await fetch(`http://localhost:8080/posts/${postId}/comments/${comment.comment_id}`, {
+                        method: "DELETE",
+                    });
+
+                    if (response.ok) {
+                        alert("댓글이 삭제되었습니다.");
+                        commentItem.remove();
+                    } else {
+                        const errorData = await response.json();
+                        alert(`댓글 삭제 실패: ${errorData.message}`);
+                    }
+                } catch (error) {
+                    console.error("Error deleting comment:", error);
+                    alert("댓글 삭제 중 오류가 발생했습니다.");
+                }
             };
         });
     };
