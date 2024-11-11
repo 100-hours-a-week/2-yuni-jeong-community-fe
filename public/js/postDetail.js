@@ -142,12 +142,41 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     };
 
+    const deletePost = async () => {
+        const deleteModal = document.getElementById("deleteModal");
+        deleteModal.style.display = "flex";
+    
+        document.getElementById("cancelButton").onclick = () => {
+            deleteModal.style.display = "none";
+        };
+    
+        document.getElementById("confirmButton").onclick = async () => {
+            deleteModal.style.display = "none";
+            try {
+                const response = await fetch(`http://localhost:8080/posts/${postId}`, {
+                    method: "DELETE",
+                });
+                if (response.ok) {
+                    alert("게시글이 삭제되었습니다.");
+                    window.location.href = "/posts";
+                } else {
+                    const errorData = await response.json();
+                    alert(`삭제 실패: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error("Error deleting post:", error);
+                alert("게시글 삭제 중 오류가 발생했습니다.");
+            }
+        };
+    };
+
     const initialize = () => {
         if (postId) {
             fetchPost();
             fetchComments();
             handleCommentInput();
-            submitButton.addEventListener("click", addComment); // 댓글 등록 이벤트 연결
+            submitButton.addEventListener("click", addComment);
+            document.querySelector(".delete-button").addEventListener("click", deletePost);
         } else {
             console.error("Invalid post ID.");
         }
