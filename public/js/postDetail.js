@@ -1,27 +1,18 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const postListContainer = document.querySelector(".post-list-container");
     const postId = new URLSearchParams(window.location.search).get("id");
     const commentInput = document.querySelector(".comment-input");
     const submitButton = document.querySelector(".comment-submit-button");
 
-    const formatNumber = (num) => {
-        if (num >= 100000) return `${Math.floor(num / 1000)}k`;
-        if (num >= 10000) return `${Math.floor(num / 1000)}k`;
-        if (num >= 1000) return `${Math.floor(num / 100) / 10}k`;
-        return num;
-    };
+    const formatNumber = (num) => (
+        num >= 100000 ? `${Math.floor(num / 1000)}k` :
+        num >= 10000 ? `${Math.floor(num / 1000)}k` :
+        num >= 1000 ? `${Math.floor(num / 100) / 10}k` :
+        num
+    );
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        const [year, month, day, hours, minutes, seconds] = [
-            date.getFullYear(),
-            String(date.getMonth() + 1).padStart(2, '0'),
-            String(date.getDate()).padStart(2, '0'),
-            String(date.getHours()).padStart(2, '0'),
-            String(date.getMinutes()).padStart(2, '0'),
-            String(date.getSeconds()).padStart(2, '0')
-        ];
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
     };
 
     const displayPost = (post) => {
@@ -44,11 +35,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             const response = await fetch(`http://localhost:8080/posts/${postId}`);
             const { data: post } = await response.json();
-            post ? displayPost(post) : document.querySelector(".post-content").textContent = "게시글을 찾을 수 없습니다.";
+            if (post) displayPost(post);
+            else document.querySelector(".post-content").textContent = "게시글을 찾을 수 없습니다.";
         } catch (error) {
             console.error("Error fetching post details:", error);
         }
     };
+
+    document.querySelector(".edit-button").addEventListener("click", () => {
+        window.location.href = `/post/edit?id=${postId}`;
+    });
 
     const displayComment = (comment) => {
         const commentItem = document.createElement("div");
@@ -90,9 +86,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             const response = await fetch(`http://localhost:8080/posts/${postId}/comments`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ user_id: 1, content }) // TODO: 현재 접속한 user_id 불러오게 수정
+                body: JSON.stringify({ user_id: 1, content })
             });
-    
+
             if (response.ok) {
                 const { data: newComment } = await response.json();
                 displayComment(newComment);
@@ -102,7 +98,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error("Error adding comment:", error);
         }
     };
-    
 
     const setUpCommentActions = (commentItem, comment) => {
         const editCommentButton = commentItem.querySelector(".edit-button");
@@ -119,7 +114,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             };
         });
 
-        // 댓글 삭제
         deleteCommentButton.addEventListener("click", () => {
             const commentDeleteModal = document.getElementById("commentDeleteModal");
             commentDeleteModal.style.display = "flex";
