@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const commentInput = document.querySelector(".comment-input");
     const submitButton = document.querySelector(".comment-submit-button");
 
+    let editingCommentId = null;
+
     const formatNumber = (num) => (
         num >= 100000 ? `${Math.floor(num / 1000)}k` :
         num >= 10000 ? `${Math.floor(num / 1000)}k` :
@@ -78,27 +80,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    const addComment = async () => {
-        const content = commentInput.value.trim();
-        if (!content) return;
-
-        try {
-            const response = await fetch(`http://localhost:8080/posts/${postId}/comments`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ user_id: 1, content })
-            });
-
-            if (response.ok) {
-                const { data: newComment } = await response.json();
-                displayComment(newComment);
-                commentInput.value = "";
-            }
-        } catch (error) {
-            console.error("Error adding comment:", error);
-        }
-    };
-
     const setUpCommentActions = (commentItem, comment) => {
         const editCommentButton = commentItem.querySelector(".edit-button");
         const deleteCommentButton = commentItem.querySelector(".delete-button");
@@ -106,12 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         editCommentButton.addEventListener("click", () => {
             commentInput.value = comment.content;
             submitButton.textContent = "댓글 수정";
-            submitButton.onclick = () => {
-                comment.content = commentInput.value;
-                commentItem.querySelector(".comment-text").textContent = comment.content;
-                submitButton.textContent = "댓글 등록";
-                commentInput.value = "";
-            };
+            editingCommentId = comment.comment_id;
         });
 
         deleteCommentButton.addEventListener("click", () => {
@@ -143,7 +119,48 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             };
         });
+        
     };
+
+    const addComment = async () => {
+        const content = commentInput.value.trim();
+        if (!content) return;
+
+        const url = editingCommentId
+            ? `http://localhost:8080/posts/${postId}/comments/${editingCommentId}`
+            : `http://localhost:8080/posts/${postId}/comments`;
+        const method = editingCommentId ? "PUT" : "POST";
+
+        try {
+            const response = await fetch(url, {
+                method: method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id: 1, content })
+            });
+            console.log(response.status)
+
+            if (response.ok) {
+                if (editingCommentId) {
+                    alert("댓글이 수정되었습니다.");
+                    editingCommentId = null; // 수정 완료 후 초기화
+                    submitButton.textContent = "댓글 등록";
+                } else {
+                    const { data: newComment } = await response.json();
+                    displayComment(newComment);
+                }
+                commentInput.value = "";
+                fetchComments(); // 댓글 목록 새로고침
+            } else {
+                const result = await response.json();
+                alert(`오류: ${result.message}`);
+            }
+        } catch (error) {
+            console.error("Error posting/updating comment", error);
+            alert("댓글 작성/수정 중 오류가 발생했습니다.");
+        }
+    };
+
+    submitButton.addEventListener("click", addComment);
 
     const handleCommentInput = () => {
         commentInput.addEventListener("input", () => {
