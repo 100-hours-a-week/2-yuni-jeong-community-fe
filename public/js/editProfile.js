@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     const profilePhoto = document.getElementById("profilePhoto");
     const profilePhotoContainer = document.getElementById("profilePhotoContainer");
     const saveChangesButton = document.getElementById("saveChangesButton");
@@ -6,6 +6,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const deleteAccountModal = document.getElementById("deleteAccountModal");
     const cancelButton = document.getElementById("cancelButton");
     const confirmButton = document.getElementById("confirmButton");
+    const emailDisplay = document.querySelector(".email-display");
+    const nicknameInput = document.getElementById("nickname");
+
+    try {
+        const response = await fetch("http://localhost:8080/auth/current", { credentials: 'include'});
+        if (response.ok){
+            const { data } = await response.json();
+            emailDisplay.textContent = data.email;
+            nicknameInput.value = data.nickname;
+        } else {
+            console.error("사용자 정보를 불러오는 데 실패했습니다.");
+        }
+    } catch (error) {
+        console.error("Error fetching user info : ", error);
+    }
+    console.log(emailDisplay)
 
     // 프로필 사진 미리보기
     profilePhoto.addEventListener("change", function() {
