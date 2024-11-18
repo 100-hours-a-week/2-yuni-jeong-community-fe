@@ -21,10 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const contentHelperText = document.getElementById("content-helper-text");
 
     // 비밀번호 수정 전용 요소
-    const changePasswordButton = document.querySelector(".submitButton");
+    const changePasswordButton = document.getElementById("changePasswordButton");
 
     // 로그인/회원가입 유효성 검사 함수
     const validateEmail = () => {
+        if (!emailInput) return true;
+
         const emailValue = emailInput?.value.trim();
         const emailHelper = emailInput?.nextElementSibling;
 
@@ -41,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const validatePassword = () => {
+        if (!passwordInput) return true;
+
         const passwordValue = passwordInput?.value.trim();
         const passwordHelper = passwordInput?.nextElementSibling;
 
@@ -56,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // 회원가입 유효성 검사 함수들
     const validatePasswordConfirm = () => {
         if (!passwordConfirmInput) return true;
 
@@ -73,44 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
             passwordConfirmHelper.textContent = "";
             return true;
         }
-    }
-
-    // 비밀번호 수정 페이지 전용 버튼 활성화 상태 업데이트
-    const updateChangePasswordButtonState = () => {
-        const isValid = validatePassword() && validatePasswordConfirm();
-        changePasswordButton.disabled = !isValid;
-        changePasswordButton.style.backgroundColor = isValid ? "#7F6AEE" : "#ACA0EB";
-    }
-
-    // 비밀번호 수정 성공 시 토스트 메시지 표시
-    const showToastMessage = (message) => {
-        const toast = document.createElement("div");
-        toast.textContent = message;
-        Object.assign(toast.style, {
-            position: "fixed",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            padding: "10px 20px",
-            backgroundColor: "#242424",
-            color: "#fff",
-            borderRadius: "5px"
-        });
-        document.body.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.remove();
-        }, 2000);
-    }
-
-    if (changePasswordButton && changePasswordButton.classList.contains("change-password-page")) {
-        changePasswordButton.addEventListener("click", function (e) {
-            e.preventDefault();
-            if (validatePassword() && validatePasswordConfirm()) {
-                showToastMessage("수정 완료");
-                // 실제 비밀번호 수정 로직 추가
-            }
-        });
     }
 
 
@@ -135,23 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    const validateProfilePhoto = () => {
-        if (!profilePhotoInput) return true;
-
-        if (!profilePhotoInput.value) {
-            if (profilePhotoHelper) {
-                profilePhotoHelper.style.display = "block";
-            }
-            return false;
-        } else {
-            if (profilePhotoHelper) {
-                profilePhotoHelper.style.display = "none";
-            }
-            return true;
-        }
-    }
-
-    // 게시글 작성 유효성 검사 함수들
     const validateTitle = () => {
         if (!titleInput) return true;
 
@@ -180,6 +128,146 @@ document.addEventListener("DOMContentLoaded", function () {
             return true;
         }
     }
+
+    const validateProfilePhoto = () => {
+        if (!profilePhotoInput) return true;
+
+        if (!profilePhotoInput.value) {
+            if (profilePhotoHelper) {
+                profilePhotoHelper.style.display = "block";
+            }
+            return false;
+        } else {
+            if (profilePhotoHelper) {
+                profilePhotoHelper.style.display = "none";
+            }
+            return true;
+        }
+    }
+
+    const updateButtonState = (button, isValid) => {
+        if (!button) return;
+        button.disabled = !isValid;
+        button.style.backgroundColor = isValid ? "#7F6AEE" : "#ACA0EB";
+    };
+
+
+    // 버튼 상태 업데이트 함수
+    // const updateActionButtonState = () => {
+    //     const isLogin = !!loginButton;
+    //     const isSignup = !!registerButton;
+    //     const isFormValid = isSignup
+    //         ? validateEmail() && validatePassword() && validatePasswordConfirm() && validateNickname()
+    //         : validateEmail() && validatePassword();
+
+    //     const actionButton = isSignup ? registerButton : loginButton;
+    //     if (actionButton) {
+    //         actionButton.disabled = !isFormValid;
+    //         actionButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
+    //     }
+    // };
+
+    const updateActionButtonState = () => {
+        if (loginButton) {
+            const isFormValid = validateEmail() && validatePassword();
+            updateButtonState(loginButton, isFormValid);
+        }
+
+        if (registerButton) {
+            const isFormValid =
+                validateEmail() && validatePassword() && validatePasswordConfirm();
+            updateButtonState(registerButton, isFormValid);
+        }
+    };
+
+    // 비밀번호 수정 페이지 전용 버튼 활성화 상태 업데이트
+    // const updateChangePasswordButtonState = () => {
+    //     const isValid = validatePassword() && validatePasswordConfirm();
+    //     changePasswordButton.disabled = !isValid;
+    //     changePasswordButton.style.backgroundColor = isValid ? "#7F6AEE" : "#ACA0EB";
+    // }
+    const updateChangePasswordButtonState = () => {
+        if (!changePasswordButton) return;
+
+        const isFormValid = validatePassword() && validatePasswordConfirm();
+        updateButtonState(changePasswordButton, isFormValid);
+    };
+
+
+    const updateSubmitButtonState = () =>  {
+        if (!submitButton) return;
+
+        const isFormValid = validateTitle() && validateContent();
+        updateButtonState(submitButton, isFormValid);
+    };
+
+    // 토스트 메시지 표시 함수
+    const showToastMessage = (message) => {
+        const toast = document.createElement("div");
+        toast.textContent = message;
+        Object.assign(toast.style, {
+            position: "fixed",
+            bottom: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "10px 20px",
+            backgroundColor: "#242424",
+            color: "#fff",
+            borderRadius: "5px"
+        });
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 2000);
+    }
+
+    // if (changePasswordButton && changePasswordButton.classList.contains("change-password-page")) {
+    //     changePasswordButton.addEventListener("click", function (e) {
+    //         e.preventDefault();
+    //         if (validatePassword() && validatePasswordConfirm()) {
+    //             showToastMessage("수정 완료");
+    //             // 실제 비밀번호 수정 로직 추가
+    //         }
+    //     });
+    // }
+
+    changePasswordButton?.addEventListener("click", async function (e) {
+        e.preventDefault();
+        if (validatePassword() && validatePasswordConfirm()) {
+            try {
+                const response = await fetch(`http://localhost:8080/users/password`, {
+                    method: "PATCH",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        new_password: passwordInput.value,
+                    }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showToastMessage("수정 완료");
+                    passwordInput.value = "";
+                    passwordConfirmInput.value = "";
+                    updateChangePasswordButtonState();
+                } else {
+                    showToastMessage(result.message || "수정 실패");
+                }
+            } catch (error) {
+                console.error("Error updating password:", error);
+                showToastMessage("서버 오류로 인해 비밀번호를 수정할 수 없습니다.");
+            }
+        }
+    });
+
+    [passwordInput, passwordConfirmInput].forEach(input =>
+        input?.addEventListener("input", updateChangePasswordButtonState)
+    );
+
 
     loginButton?.addEventListener("click", async function (e) {
         e.preventDefault();
@@ -244,28 +332,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 버튼 상태 업데이트 함수
-    const updateActionButtonState = () => {
-        const isLogin = !!loginButton;
-        const isSignup = !!registerButton;
-        const isFormValid = isSignup
-            ? validateEmail() && validatePassword() && validatePasswordConfirm() && validateNickname()
-            : validateEmail() && validatePassword();
-
-        const actionButton = isSignup ? registerButton : loginButton;
-        if (actionButton) {
-            actionButton.disabled = !isFormValid;
-            actionButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
-        }
-    };
-
-    const updateSubmitButtonState = () =>  {
-        if (!submitButton) return;
-
-        const isFormValid = validateTitle() && validateContent();
-        submitButton.disabled = !isFormValid;
-        submitButton.style.backgroundColor = isFormValid ? "#7F6AEE" : "#ACA0EB";
-    };
 
     // 이벤트 리스너 추가
     [emailInput, passwordInput, passwordConfirmInput, nicknameInput].forEach(input =>
