@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch('http://localhost:8080/posts', {
                     method: 'POST',
+                    credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         title: titleInput.value.trim(),
                         content: contentInput.value.trim(),
-                        user_id: 1, // TODO: 로그인된 사용자 ID로 수정
                         image_url: '', // 이미지 URL 추가 필요 시 처리
                     }),
                 });

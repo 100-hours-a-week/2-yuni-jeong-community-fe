@@ -33,12 +33,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             postImageContainer.style.backgroundImage = `url(${post.image_url})`;
             postImageContainer.style.display = 'block';
         }
+
+        if (post.isAuthor) {
+            document.querySelector(".post-actions").style.display = "flex";
+        } else {
+            document.querySelector(".post-actions").style.display = "none";
+        }
     };
 
     const fetchPost = async () => {
         try {
             const response = await fetch(
                 `http://localhost:8080/posts/${postId}`,
+                {
+                    credentials: 'include',
+                },
             );
             const { data: post } = await response.json();
 
@@ -65,8 +74,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <span class="comment-author-name">${comment.author}</span>
                     <span class="comment-date">${formatDate(comment.date)}</span>
                     <div class="comment-actions">
+                    ${comment.isAuthor ? `
                         <button class="edit-button">수정</button>
                         <button class="delete-button">삭제</button>
+                    ` : ''}
                     </div>
                 </div>
                 <p class="comment-text">${comment.content}</p>
@@ -80,6 +91,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const response = await fetch(
                 `http://localhost:8080/posts/${postId}/comments`,
+                {
+                    credentials: 'include',
+                },
             );
             const { data: comments } = await response.json();
 
@@ -96,26 +110,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         const editButton = commentItem.querySelector('.edit-button');
         const deleteButton = commentItem.querySelector('.delete-button');
 
-        editButton.addEventListener('click', () => {
-            commentInput.value = comment.content;
-            submitButton.textContent = '댓글 수정';
-            editingCommentId = comment.comment_id;
-        });
+        if (editButton){
+            editButton.addEventListener('click', () => {
+                commentInput.value = comment.content;
+                submitButton.textContent = '댓글 수정';
+                editingCommentId = comment.comment_id;
+            });
+        }
 
-        deleteButton.addEventListener('click', () => {
-            const deleteModal = document.getElementById('commentDeleteModal');
-            deleteModal.style.display = 'flex';
-
-            document.getElementById('commentCancelButton').onclick = () => {
-                deleteModal.style.display = 'none';
-            };
-
-            document.getElementById('commentConfirmButton').onclick =
-                async () => {
+        if (deleteButton) {
+            deleteButton.addEventListener('click', () => {
+                const deleteModal = document.getElementById('commentDeleteModal');
+                deleteModal.style.display = 'flex';
+    
+                document.getElementById('commentCancelButton').onclick = () => {
                     deleteModal.style.display = 'none';
-                    await deleteComment(comment.comment_id);
                 };
-        });
+    
+                document.getElementById('commentConfirmButton').onclick =
+                    async () => {
+                        deleteModal.style.display = 'none';
+                        await deleteComment(comment.comment_id);
+                    };
+            });
+        }
     };
 
     const deleteComment = async commentId => {
@@ -124,6 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `http://localhost:8080/posts/${postId}/comments/${commentId}`,
                 {
                     method: 'DELETE',
+                    credentials: 'include',
                 },
             );
 
@@ -152,8 +171,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const response = await fetch(url, {
                 method,
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id: 1, content }), // TODO: user_id 동적으로 처리
+                body: JSON.stringify({ user_id: 1, content }),
             });
 
             if (response.ok) {
@@ -192,6 +212,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     `http://localhost:8080/posts/${postId}`,
                     {
                         method: 'DELETE',
+                        credentials: 'include',
                     },
                 );
 

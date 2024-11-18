@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `http://localhost:8080/posts/${postId}`,
                 {
                     method: 'PUT',
+                    credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(updatedPost),
                 },
