@@ -1,16 +1,19 @@
 import { formatDate } from './utils.js';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
     const postListContainer = document.querySelector('.post-list-container');
     let page = 1;
     let loading = false;
 
-    const renderPost = (post) => {
+    const renderPost = post => {
         const postItem = document.createElement('div');
         postItem.classList.add('post-item');
-        postItem.style.cursor = "pointer";
+        postItem.style.cursor = 'pointer';
 
-        const postTitle = post.title.length > 26 ? post.title.substring(0, 26) + '...' : post.title;
+        const postTitle =
+            post.title.length > 26
+                ? post.title.substring(0, 26) + '...'
+                : post.title;
 
         postItem.innerHTML = `
             <div class="post-title">${postTitle}</div>
@@ -29,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
 
-        postItem.addEventListener("click", () => {
+        postItem.addEventListener('click', () => {
             window.location.href = `/post?id=${post.post_id}`;
         });
 
@@ -40,11 +43,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (loading) return;
         loading = true;
         try {
-            const response = await fetch(`http://localhost:8080/posts?page=${page}`, { credentials: 'include' });
+            const response = await fetch(
+                `http://localhost:8080/posts?page=${page}`,
+                { credentials: 'include' },
+            );
             const { data: posts } = await response.json();
 
             if (!posts || posts.length === 0) {
-                console.log("더 이상 게시글이 없습니다.");
+                console.log('더 이상 게시글이 없습니다.');
                 loading = false;
                 return;
             }
@@ -53,16 +59,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
             page += 1;
         } catch (error) {
-            console.error("Error fetching posts:", error);
-            alert("게시글을 불러오는 중 문제가 발생했습니다.");
+            console.error('Error fetching posts:', error);
+            alert('게시글을 불러오는 중 문제가 발생했습니다.');
         } finally {
             loading = false;
         }
     };
 
-
-    window.addEventListener("scroll", () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
+    window.addEventListener('scroll', () => {
+        if (
+            window.innerHeight + window.scrollY >=
+                document.body.offsetHeight - 100 &&
+            !loading
+        ) {
             fetchPosts();
         }
     });

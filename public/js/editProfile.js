@@ -2,22 +2,27 @@ import { validateNickname } from './validation.js';
 import { updateButtonState, showToastMessage } from './utils.js';
 import { initializeProfilePhoto } from './profilePhoto.js';
 
-document.addEventListener("DOMContentLoaded", async function() {
-    const emailDisplay = document.querySelector(".email-display");
-    const nicknameInput = document.getElementById("nickname");
-    const saveButton = document.getElementById("saveButton");
-    const profilePhotoInput = document.getElementById("profilePhoto");
-    const profilePhotoContainer = document.querySelector(".profile-photo");
-    const profilePhotoHelper = document.querySelector(".profile-photo-helper");
-    const plusIcon = document.querySelector(".plus-icon");
+document.addEventListener('DOMContentLoaded', async function () {
+    const emailDisplay = document.querySelector('.email-display');
+    const nicknameInput = document.getElementById('nickname');
+    const saveButton = document.getElementById('saveButton');
+    const profilePhotoInput = document.getElementById('profilePhoto');
+    const profilePhotoContainer = document.querySelector('.profile-photo');
+    const profilePhotoHelper = document.querySelector('.profile-photo-helper');
+    const plusIcon = document.querySelector('.plus-icon');
 
-    initializeProfilePhoto(profilePhotoInput, profilePhotoContainer, profilePhotoHelper, plusIcon);
-    
+    initializeProfilePhoto(
+        profilePhotoInput,
+        profilePhotoContainer,
+        profilePhotoHelper,
+        plusIcon,
+    );
+
     // 현재 유저 정보 불러오기
     const fetchUserInfo = async () => {
         try {
-            const response = await fetch("http://localhost:8080/auth/current", {
-                credentials: "include",
+            const response = await fetch('http://localhost:8080/auth/current', {
+                credentials: 'include',
             });
             if (response.ok) {
                 const { data } = await response.json();
@@ -25,18 +30,20 @@ document.addEventListener("DOMContentLoaded", async function() {
                 nicknameInput.value = data.nickname;
                 if (data.profile_image) {
                     profilePhotoContainer.style.backgroundImage = `url(${data.profile_image})`;
-                    profilePhotoContainer.style.backgroundSize = "cover";
-                    profilePhotoContainer.style.backgroundPosition = "center";
-                    plusIcon.style.display = "none";
-                    profilePhotoHelper.style.display = "none";
+                    profilePhotoContainer.style.backgroundSize = 'cover';
+                    profilePhotoContainer.style.backgroundPosition = 'center';
+                    plusIcon.style.display = 'none';
+                    profilePhotoHelper.style.display = 'none';
                 }
             } else {
-                console.error("사용자 정보를 불러오는 데 실패했습니다.");
-                showToastMessage("사용자 정보를 불러오는 데 실패했습니다.");
+                console.error('사용자 정보를 불러오는 데 실패했습니다.');
+                showToastMessage('사용자 정보를 불러오는 데 실패했습니다.');
             }
         } catch (error) {
-            console.error("Error fetching user info:", error);
-            showToastMessage("서버 오류로 인해 사용자 정보를 불러오지 못했습니다.");
+            console.error('Error fetching user info:', error);
+            showToastMessage(
+                '서버 오류로 인해 사용자 정보를 불러오지 못했습니다.',
+            );
         }
     };
 
@@ -49,31 +56,34 @@ document.addEventListener("DOMContentLoaded", async function() {
     // 회원정보 수정 API
     const updateUserProfile = async () => {
         try {
-            const response = await fetch("http://localhost:8080/users/profile", {
-                method: "PUT",
-                credentials: "include",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    nickname: nicknameInput.value.trim(),
-                    profile_image: profilePhotoInput.value || "",
-                }),
-            });
+            const response = await fetch(
+                'http://localhost:8080/users/profile',
+                {
+                    method: 'PUT',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nickname: nicknameInput.value.trim(),
+                        profile_image: profilePhotoInput.value || '',
+                    }),
+                },
+            );
 
             const result = await response.json();
 
             if (response.ok) {
-                showToastMessage("수정 완료");
+                showToastMessage('수정 완료');
             } else {
-                showToastMessage(result.message || "수정 실패");
+                showToastMessage(result.message || '수정 실패');
             }
         } catch (error) {
-            console.error("Profile update error:", error);
-            showToastMessage("서버 오류로 인해 수정 실패");
+            console.error('Profile update error:', error);
+            showToastMessage('서버 오류로 인해 수정 실패');
         }
     };
 
     // 저장 버튼 클릭 이벤트
-    saveButton?.addEventListener("click", async (e) => {
+    saveButton?.addEventListener('click', async e => {
         e.preventDefault();
         if (validateNickname(nicknameInput)) {
             await updateUserProfile();
@@ -81,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     });
 
     // 입력 이벤트 리스너 추가
-    nicknameInput?.addEventListener("input", updateSaveButtonState);
+    nicknameInput?.addEventListener('input', updateSaveButtonState);
 
     // 초기화
     await fetchUserInfo();

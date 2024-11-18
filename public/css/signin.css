@@ -6,7 +6,7 @@
 .profile-photo {
     width: 100px;
     height: 100px;
-    background-color: #C4C4C4;
+    background-color: #c4c4c4;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -36,6 +36,6 @@
     font-family: 'Pretendard-Light';
     font-weight: 400;
     font-size: 12px;
-    color: #FF0000;
+    color: #ff0000;
     margin-top: 0;
 }

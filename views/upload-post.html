@@ -1,48 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 작성 - 아무 말 대잔치</title>
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/upload-post.css">
-</head>
-<body>
-    <header class="community-header">
-        <a href="posts" class="back-button">&lt;</a>
-        <h1 class="community-title" onclick="location.href='posts'">아무 말 대잔치</h1>
-        <img src="/images/user-profile.jpg" alt="프로필 사진" class="user-profile" id="profileImage">
-    </header>
-    
-    <div class="header-divider"></div> 
-    
-    <div class="page-container">
-        <h2 class="centered-title">게시글 작성</h2>
-        <form class="post-form">
-            <div class="input-group">
-                <label for="post-title">제목*</label>
-                <input type="text" id="post-title" maxlength="26" placeholder="제목을 입력하세요. (최대 26글자)">
-                <span class="helper-text" id="title-helper-text"></span>
-            </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>게시글 작성 - 아무 말 대잔치</title>
+        <link rel="stylesheet" href="/css/common.css" />
+        <link rel="stylesheet" href="/css/upload-post.css" />
+    </head>
+    <body>
+        <header class="community-header">
+            <a href="posts" class="back-button">&lt;</a>
+            <h1 class="community-title" onclick="location.href='posts'">
+                아무 말 대잔치
+            </h1>
+            <img
+                src="/images/user-profile.jpg"
+                alt="프로필 사진"
+                class="user-profile"
+                id="profileImage"
+            />
+        </header>
 
-            <div class="input-group">
-                <label for="post-content">내용*</label>
-                <textarea id="post-content" placeholder="내용을 입력해주세요."></textarea>
-                <span class="helper-text" id="content-helper-text"></span>
-            </div>
-            
-            <div class="input-group">
-                <label for="post-image">이미지 업로드</label>
-                <div class="file-upload-wrapper">
-                    <label class="file-upload-button" for="post-image">파일선택</label>
-                    <span class="file-upload-text">파일을 선택해주세요.</span>
-                    <input type="file" id="post-image" accept="image/*" style="display: none;">
+        <div class="header-divider"></div>
+
+        <div class="page-container">
+            <h2 class="centered-title">게시글 작성</h2>
+            <form class="post-form">
+                <div class="input-group">
+                    <label for="post-title">제목*</label>
+                    <input
+                        type="text"
+                        id="post-title"
+                        maxlength="26"
+                        placeholder="제목을 입력하세요. (최대 26글자)"
+                    />
+                    <span class="helper-text" id="title-helper-text"></span>
                 </div>
-            </div>
 
-            <button type="submit" class="submit-button" id="submit-button" disabled>완료</button>
-        </form>
-        <script type="module" src="/js/validation.js"></script>
-        <script type="module" src="/js/uploadPost.js"></script>
-    </div>
-</body>
+                <div class="input-group">
+                    <label for="post-content">내용*</label>
+                    <textarea
+                        id="post-content"
+                        placeholder="내용을 입력해주세요."
+                    ></textarea>
+                    <span class="helper-text" id="content-helper-text"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="post-image">이미지 업로드</label>
+                    <div class="file-upload-wrapper">
+                        <label class="file-upload-button" for="post-image"
+                            >파일선택</label
+                        >
+                        <span class="file-upload-text"
+                            >파일을 선택해주세요.</span
+                        >
+                        <input
+                            type="file"
+                            id="post-image"
+                            accept="image/*"
+                            style="display: none"
+                        />
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                    id="submit-button"
+                    disabled
+                >
+                    완료
+                </button>
+            </form>
+            <script type="module" src="/js/validation.js"></script>
+            <script type="module" src="/js/uploadPost.js"></script>
+        </div>
+    </body>
+</html>
