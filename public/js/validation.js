@@ -1,124 +1,134 @@
-export const validateEmail = (emailInput) => {
+export const validateEmail = emailInput => {
     if (!emailInput) return true;
 
     const emailValue = emailInput?.value.trim();
     const emailHelper = emailInput?.nextElementSibling;
 
     if (!emailValue) {
-        emailHelper.textContent = "*이메일을 입력해주세요.";
+        emailHelper.textContent = '*이메일을 입력해주세요.';
         return false;
-    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailValue)) {
-        emailHelper.innerHTML = "*올바른 이메일 주소 형식을 입력해주세요.<br>(예: example@example.com)";
+    } else if (
+        !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailValue)
+    ) {
+        emailHelper.innerHTML =
+            '*올바른 이메일 주소 형식을 입력해주세요.<br>(예: example@example.com)';
         return false;
     } else {
-        emailHelper.textContent = "";
+        emailHelper.textContent = '';
         return true;
     }
-}
+};
 
-export const validatePassword = (passwordInput) => {
+export const validatePassword = passwordInput => {
     if (!passwordInput) return true;
 
     const passwordValue = passwordInput?.value.trim();
     const passwordHelper = passwordInput?.nextElementSibling;
 
     if (!passwordValue) {
-        passwordHelper.textContent = "*비밀번호를 입력해주세요.";
+        passwordHelper.textContent = '*비밀번호를 입력해주세요.';
         return false;
-    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/.test(passwordValue)) {
-        passwordHelper.textContent = "*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 포함해야 합니다.";
+    } else if (
+        !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/.test(
+            passwordValue,
+        )
+    ) {
+        passwordHelper.textContent =
+            '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 포함해야 합니다.';
         return false;
     } else {
-        passwordHelper.textContent = "";
+        passwordHelper.textContent = '';
         return true;
     }
-}
+};
 
-export const validatePasswordConfirm = (passwordInput, passwordConfirmInput) => {
+export const validatePasswordConfirm = (
+    passwordInput,
+    passwordConfirmInput,
+) => {
     if (!passwordConfirmInput) return true;
 
     const passwordConfirmValue = passwordConfirmInput.value.trim();
     const passwordConfirmHelper = passwordConfirmInput.nextElementSibling;
 
     if (!passwordConfirmValue) {
-        passwordConfirmHelper.textContent = "*비밀번호를 한번 더 입력해주세요.";
+        passwordConfirmHelper.textContent = '*비밀번호를 한번 더 입력해주세요.';
         return false;
     } else if (passwordInput.value !== passwordConfirmValue) {
-        passwordConfirmHelper.textContent = "*비밀번호가 다릅니다.";
+        passwordConfirmHelper.textContent = '*비밀번호가 다릅니다.';
         return false;
     } else {
-        passwordConfirmHelper.textContent = "";
+        passwordConfirmHelper.textContent = '';
         return true;
     }
-}
+};
 
-
-export const validateNickname = (nicknameInput) => {
+export const validateNickname = nicknameInput => {
     if (!nicknameInput) return true;
 
     const nicknameValue = nicknameInput.value.trim();
     const nicknameHelper = nicknameInput.nextElementSibling;
 
     if (!nicknameValue) {
-        nicknameHelper.textContent = "*닉네임을 입력해주세요.";
+        nicknameHelper.textContent = '*닉네임을 입력해주세요.';
         return false;
     } else if (/\s/.test(nicknameValue)) {
-        nicknameHelper.textContent = "*띄어쓰기를 없애주세요.";
+        nicknameHelper.textContent = '*띄어쓰기를 없애주세요.';
         return false;
     } else if (nicknameValue.length > 10) {
-        nicknameHelper.textContent = "*닉네임은 최대 10자까지 가능합니다.";
+        nicknameHelper.textContent = '*닉네임은 최대 10자까지 가능합니다.';
         return false;
     } else {
-        nicknameHelper.textContent = "";
+        nicknameHelper.textContent = '';
         return true;
     }
-}
+};
 
-export const validateTitle = (titleInput) => {
+export const validateTitle = titleInput => {
     if (!titleInput) return true;
 
     const titleHelperText = titleInput?.nextElementSibling;
     const titleLength = titleInput.value.length;
 
     if (titleLength > 26) {
-        titleHelperText.textContent = "*제목은 최대 26자까지 작성 가능합니다.";
+        titleHelperText.textContent = '*제목은 최대 26자까지 작성 가능합니다.';
         return false;
     } else if (titleLength === 0) {
-        titleHelperText.textContent = "*제목을 입력해주세요.";
+        titleHelperText.textContent = '*제목을 입력해주세요.';
         return false;
     } else {
-        titleHelperText.textContent = "";
+        titleHelperText.textContent = '';
         return true;
     }
-}
+};
 
-export const validateContent = (contentInput) => {
+export const validateContent = contentInput => {
     if (!contentInput) return true;
 
     const contentHelperText = contentInput?.nextElementSibling;
     const contentLength = contentInput.value.length;
 
     if (contentLength === 0) {
-        contentHelperText.textContent = "*내용을 입력해주세요.";
+        contentHelperText.textContent = '*내용을 입력해주세요.';
         return false;
     } else {
-        contentHelperText.textContent = "";
+        contentHelperText.textContent = '';
         return true;
     }
-}
+};
 
-export const validateProfilePhoto = (profilePhotoInput) => {
+export const validateProfilePhoto = profilePhotoInput => {
     if (!profilePhotoInput) return true;
 
     if (!profilePhotoInput.value) {
         if (profilePhotoHelper) {
-            profilePhotoHelper.style.display = "block";
+            profilePhotoHelper.style.display = 'block';
         }
         return false;
     } else {
         if (profilePhotoHelper) {
-            profilePhotoHelper.style.display = "none";
+            profilePhotoHelper.style.display = 'none';
         }
         return true;
     }
-}
+};

@@ -30,7 +30,7 @@
 .post-author-avatar {
     width: 36px;
     height: 36px;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     border-radius: 50%;
 }
 
@@ -55,24 +55,24 @@
     margin-left: auto;
 }
 
-.edit-button, .delete-button {
+.edit-button,
+.delete-button {
     width: 50px;
     height: 27px;
-    border: 1px solid #ACA0EB;
+    border: 1px solid #aca0eb;
     background-color: transparent;
     color: #000;
     font-family: 'Pretendard-Medium';
     font-size: 14px;
     cursor: pointer;
-    border-radius:10px;
-
+    border-radius: 10px;
 }
 
 /* 구분선 */
 .post-divider {
     width: 592px;
     height: 1px;
-    background-color: #E0E0E0;
+    background-color: #e0e0e0;
     margin: 8px 0;
 }
 
@@ -87,7 +87,7 @@
     width: 100%;
     max-width: 544px;
     height: 306px;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     margin: 16px 0;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .stat-item {
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     padding: 10px;
     border-radius: 16px;
     text-align: center;
@@ -143,7 +143,7 @@
     width: 576px;
     max-width: 560px;
     border-radius: 16px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     padding: 16px;
     gap: 8px;
     margin: 20px;
@@ -169,14 +169,14 @@
 .comment-divider {
     width: 100%;
     height: 1px;
-    background-color: #E0E0E0;
+    background-color: #e0e0e0;
 }
 
 .comment-submit-button {
     align-self: flex-end;
     width: 138px;
     height: 39px;
-    background-color: #ACA0EB;
+    background-color: #aca0eb;
     color: #fff;
     border: none;
     border-radius: 16px;
@@ -188,10 +188,9 @@
 }
 
 .comment-submit-button:disabled {
-    background-color: #ACA0EB;
+    background-color: #aca0eb;
     cursor: not-allowed;
 }
-
 
 /* 댓글 리스트 */
 .comment-list {
@@ -212,7 +211,7 @@
 .comment-author-avatar {
     width: 36px;
     height: 36px;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     border-radius: 50%;
     margin-right: 5px;
 }
@@ -249,7 +248,6 @@
     display: flex;
     gap: 5px;
 }
-
 
 .comment-text {
     font-family: 'Pretendard-Medium';

@@ -14,7 +14,7 @@
 .modal-content {
     width: 408px;
     height: 242px;
-    background-color: #FFF;
+    background-color: #fff;
     border-radius: 12px;
     padding: 20px;
     box-sizing: border-box;
@@ -56,10 +56,10 @@
 
 .cancel-button {
     background-color: #242424;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .confirm-button {
-    background-color: #C4A5FA;
+    background-color: #c4a5fa;
     color: #000000;
 }

@@ -27,7 +27,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #F4F5F7;
+    background-color: #f4f5f7;
 }
 
 #post-title::placeholder {
@@ -43,7 +43,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #F4F5F7;
+    background-color: #f4f5f7;
     resize: none;
 }
 
@@ -64,7 +64,7 @@
     justify-content: center;
     width: 68px;
     height: 29px;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     color: #000;
     font-family: 'Pretendard-Medium';
     font-size: 14px;
@@ -75,7 +75,6 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
 
 .file-upload-text {
     font-family: 'Pretendard-Medium';
@@ -91,8 +90,8 @@
 .submit-button {
     width: 355px;
     height: 33px;
-    background-color: #ACA0EB;
-    color: #FFFFFF;
+    background-color: #aca0eb;
+    color: #ffffff;
     font-family: 'Pretendard-Medium';
     font-size: 16px;
     font-weight: 700;

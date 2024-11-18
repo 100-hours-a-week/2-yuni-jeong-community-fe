@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,9 +39,6 @@ app.get('/post', (req, res) => {
 app.get('/post/edit', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'edit-post.html'));
 });
-
-
-
 
 app.listen(3000, () => {
     console.log('http://localhost:3000 에서 서버 실행중');
