@@ -37,11 +37,9 @@ export const formatDate = dateString => {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
-export const formatNumber = num =>
-    num >= 100000
-        ? `${Math.floor(num / 1000)}k`
-        : num >= 10000
-          ? `${Math.floor(num / 1000)}k`
-          : num >= 1000
-            ? `${Math.floor(num / 100) / 10}k`
-            : num;
+export const formatNumber = (num) => (
+    num >= 100000 ? `${Math.floor(num / 1000)}k` :
+    num >= 10000 ? `${Math.floor(num / 1000)}k` :
+    num >= 1000 ? `${Math.floor(num / 100) / 10}k` :
+    num
+);

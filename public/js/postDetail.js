@@ -13,6 +13,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let editingCommentId = null;
 
+    // 현재 유저 ID 반환
+    const getCurrentUserId = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/auth/current', {
+                credentials: 'include',
+            });
+    
+            if (response.ok) {
+                const { data } = await response.json();
+                return data.user_id; // 사용자 ID 반환
+            } else {
+                console.error('사용자 정보를 가져오지 못했습니다.');
+                return null;
+            }
+        } catch (error) {
+            console.error('Error fetching current user ID:', error);
+            return null;
+        }
+    };
+
     const renderPost = post => {
         postTitle.textContent = post.title;
         postAuthor.textContent = post.author;
@@ -167,13 +187,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             ? `http://localhost:8080/posts/${postId}/comments/${editingCommentId}`
             : `http://localhost:8080/posts/${postId}/comments`;
         const method = editingCommentId ? 'PUT' : 'POST';
+        const currentUserId = await getCurrentUserId();
 
         try {
             const response = await fetch(url, {
                 method,
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id: 1, content }),
+                body: JSON.stringify({ currentUserId, content }),
             });
 
             if (response.ok) {
@@ -185,7 +206,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     alert('댓글이 등록되었습니다.');
                 }
                 commentInput.value = '';
-                fetchComments();
+                await fetchPost();
+                await fetchComments();
             } else {
                 const result = await response.json();
                 alert(`오류: ${result.message}`);
