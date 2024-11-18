@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     const profilePhotoContainer = document.querySelector('.profile-photo');
     const profilePhotoHelper = document.querySelector('.profile-photo-helper');
     const plusIcon = document.querySelector('.plus-icon');
+    const deleteAccountButton = document.getElementById('deleteAccountButton');
+    const deleteAccountModal = document.getElementById('deleteAccountModal');
+    const confirmButton = document.getElementById('confirmButton');
+    const cancelButton = document.getElementById('cancelButton');
 
     initializeProfilePhoto(
         profilePhotoInput,
@@ -81,6 +85,42 @@ document.addEventListener('DOMContentLoaded', async function () {
             showToastMessage('서버 오류로 인해 수정 실패');
         }
     };
+
+    const deleteAccount = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/users', {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+
+            if (response.ok) {
+                alert('회원 탈퇴가 완료되었습니다.');
+                window.location.href = '/';
+            } else {
+                const result = await response.json();
+                alert(result.message || '회원 탈퇴 실패');
+            }
+        } catch (error) {
+            console.error('회원 탈퇴 오류:', error);
+            alert('서버 오류로 인해 회원 탈퇴 실패');
+        }
+    };
+
+    // 회원 탈퇴 모달 열기
+    deleteAccountButton.addEventListener('click', () => {
+        deleteAccountModal.style.display = 'flex';
+    });
+
+    // 모달 닫기
+    cancelButton.addEventListener('click', () => {
+        deleteAccountModal.style.display = 'none';
+    });
+
+    // 탈퇴 확인 버튼
+    confirmButton.addEventListener('click', async () => {
+        deleteAccountModal.style.display = 'none';
+        await deleteAccount();
+    });
 
     // 저장 버튼 클릭 이벤트
     saveButton?.addEventListener('click', async e => {
