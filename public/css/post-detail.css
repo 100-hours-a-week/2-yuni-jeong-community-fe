@@ -268,7 +268,7 @@
     width: 80px;
     font-size: 15px;
     font-weight: 700;
-    padding-right: 10px;
+    padding-right: 25px;
 }
 
 .comment-date {
@@ -287,4 +287,5 @@
     font-family: 'Pretendard-Medium';
     font-size: 15px;
     font-weight: 400;
+    margin-top: 10px;
 }
