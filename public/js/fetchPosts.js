@@ -1,6 +1,8 @@
-import { formatDate } from './utils.js';
+import { formatDate, checkLogin } from './utils.js';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+    await checkLogin();
+
     const postListContainer = document.querySelector('.post-list-container');
     let page = 1;
     let loading = false;
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loading = true;
         try {
             const response = await fetch(
-                `http://localhost:8080/posts?page=${page}`,
+                `http://localhost:8080/posts/page/${page}`,
                 { credentials: 'include' },
             );
             const { data: posts } = await response.json();
@@ -65,6 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 loading = false;
                 return;
             }
+
+            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             posts.forEach(renderPost);
 

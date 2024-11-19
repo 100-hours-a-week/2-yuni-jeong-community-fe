@@ -1,6 +1,8 @@
-import { formatDate, formatNumber } from './utils.js';
+import { formatDate, formatNumber, checkLogin } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    await checkLogin();
+
     const postId = new URLSearchParams(window.location.search).get('id');
     const commentInput = document.querySelector('.comment-input');
     const submitButton = document.querySelector('.comment-submit-button');
@@ -108,7 +110,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         commentItem.classList.add('comment-item');
 
         commentItem.innerHTML = `
-            <div class="comment-author-avatar"></div>
+            <div class="comment-author-avatar">
+                <img
+                    src="http://localhost:8080${comment.profile_image || '/uploads/user-profile.jpg'}"
+                    alt="프로필 이미지"
+                    class="comment-author-profile"
+                />
+            </div>
             <div class="comment-content">
                 <div class="comment-item-header">
                     <span class="comment-author-name">${comment.author}</span>
@@ -206,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const url = editingCommentId
             ? `http://localhost:8080/posts/${postId}/comments/${editingCommentId}`
             : `http://localhost:8080/posts/${postId}/comments`;
-        const method = editingCommentId ? 'PUT' : 'POST';
+        const method = editingCommentId ? 'PATCH' : 'POST';
         const currentUserId = await getCurrentUserId();
 
         try {

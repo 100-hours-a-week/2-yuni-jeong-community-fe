@@ -1,7 +1,8 @@
 import { validatePassword, validatePasswordConfirm } from './validation.js';
-import { updateButtonState, showToastMessage } from './utils.js';
+import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await checkLogin();
     const passwordInput = document.getElementById('password');
     const passwordConfirmInput = document.getElementById('passwordConfirm');
     const changePasswordButton = document.getElementById(

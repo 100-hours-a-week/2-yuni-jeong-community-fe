@@ -1,8 +1,9 @@
 import { validateNickname } from './validation.js';
-import { updateButtonState, showToastMessage } from './utils.js';
+import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 import { initializeProfilePhoto } from './profilePhoto.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
+    await checkLogin();
     const emailDisplay = document.querySelector('.email-display');
     const nicknameInput = document.getElementById('nickname');
     const saveButton = document.getElementById('saveButton');
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const response = await fetch(
                 'http://localhost:8080/users/profile',
                 {
-                    method: 'PUT',
+                    method: 'PATCH',
                     credentials: 'include',
                     body: formData,
                 },
