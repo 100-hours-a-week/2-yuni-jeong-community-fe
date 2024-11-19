@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         loading = true;
         try {
             const response = await fetch(
-                `http://localhost:8080/posts?page=${page}`,
+                `http://localhost:8080/posts/page/${page}`,
                 { credentials: 'include' },
             );
             const { data: posts } = await response.json();
