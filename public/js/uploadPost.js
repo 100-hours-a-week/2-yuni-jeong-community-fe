@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     showToastMessage('게시글이 등록되었습니다');
-                    setTimeout(() => (window.location.href = '/posts'), 1000);
+                    setTimeout(() => (window.location.href = `/post?id=${result.data.post_id}`), 1000);
                 } else {
                     showToastMessage(result.message || '게시글 등록 실패');
                 }

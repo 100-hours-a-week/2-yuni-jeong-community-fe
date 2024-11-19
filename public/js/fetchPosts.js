@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(posts)
 
             if (!posts || posts.length === 0) {
-                console.log('더 이상 게시글이 없습니다.');
                 loading = false;
                 return;
             }
