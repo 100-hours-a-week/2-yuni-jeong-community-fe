@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (data.profile_image) {
                     profilePhotoContainer.style.backgroundImage = `url(http://localhost:8080${data.profile_image})`;
                 } else {
-                    profilePhotoContainer.style.backgroundImage = 'url(http://localhost:8080/uploads/profile-icon.png)';
+                    profilePhotoContainer.style.backgroundImage = 'url(http://localhost:8080/uploads/user-profile.jpg)';
                 }
 
                 profilePhotoContainer.style.backgroundSize = 'cover';

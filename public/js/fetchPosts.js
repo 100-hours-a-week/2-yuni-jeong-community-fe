@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const profileImageUrl = post.profile_image
             ? `http://localhost:8080${post.profile_image}`
-            : 'http://localhost:8080/uploads/profile-icon.png';
+            : 'http://localhost:8080/uploads/user-profile.jpg';
 
         postItem.innerHTML = `
             <div class="post-title">${postTitle}</div>
