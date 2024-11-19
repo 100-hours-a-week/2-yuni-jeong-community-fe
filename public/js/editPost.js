@@ -1,7 +1,8 @@
 import { validateTitle, validateContent } from './validation.js';
-import { updateButtonState, showToastMessage } from './utils.js';
+import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    await checkLogin();
     const titleInput = document.getElementById('post-title');
     const contentInput = document.getElementById('post-content');
     const editButton = document.getElementById('edit-button');

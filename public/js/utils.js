@@ -43,3 +43,20 @@ export const formatNumber = (num) => (
     num >= 1000 ? `${Math.floor(num / 100) / 10}k` :
     num
 );
+
+export const checkLogin = async () => {
+    try {
+        const response = await fetch('http://localhost:8080/auth/current', {
+            credentials: 'include',
+        });
+
+        // 로그인 안됐으면 로그인 페이지로 이동
+        if (!response.ok) {
+            alert('로그인 상태가 아닙니다. 로그인 페이지로 이동합니다. ')
+            window.location.href = '/';
+        }
+    } catch (error) {
+        console.error('로그인 확인 중 오류 발생:', error);
+        window.location.href = '/';
+    }
+};

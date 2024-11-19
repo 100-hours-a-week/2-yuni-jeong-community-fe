@@ -1,6 +1,8 @@
-import { formatDate } from './utils.js';
+import { formatDate, checkLogin } from './utils.js';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+    await checkLogin();
+
     const postListContainer = document.querySelector('.post-list-container');
     let page = 1;
     let loading = false;

@@ -1,6 +1,8 @@
-import { formatDate, formatNumber } from './utils.js';
+import { formatDate, formatNumber, checkLogin } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    await checkLogin();
+
     const postId = new URLSearchParams(window.location.search).get('id');
     const commentInput = document.querySelector('.comment-input');
     const submitButton = document.querySelector('.comment-submit-button');
