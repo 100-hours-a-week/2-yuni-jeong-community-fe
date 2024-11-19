@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const response = await fetch(
                 'http://localhost:8080/users/profile',
                 {
-                    method: 'PUT',
+                    method: 'PATCH',
                     credentials: 'include',
                     body: formData,
                 },

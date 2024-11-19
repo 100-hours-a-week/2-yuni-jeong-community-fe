@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch(
                 `http://localhost:8080/posts/${postId}`,
                 {
-                    method: 'PUT',
+                    method: 'PATCH',
                     credentials: 'include',
                     body: formData,
                 },

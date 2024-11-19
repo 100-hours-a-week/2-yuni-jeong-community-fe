@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const url = editingCommentId
             ? `http://localhost:8080/posts/${postId}/comments/${editingCommentId}`
             : `http://localhost:8080/posts/${postId}/comments`;
-        const method = editingCommentId ? 'PUT' : 'POST';
+        const method = editingCommentId ? 'PATCH' : 'POST';
         const currentUserId = await getCurrentUserId();
 
         try {
