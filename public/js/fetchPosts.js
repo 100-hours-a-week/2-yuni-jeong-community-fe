@@ -66,6 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
+            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
             posts.forEach(renderPost);
 
             page += 1;
