@@ -39,6 +39,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         postDate.textContent = formatDate(post.date);
         postContent.textContent = post.content;
 
+        const postAuthorProfileImage = document.getElementById('postAuthorProfileImage');
+        postAuthorProfileImage.src = `http://localhost:8080${post.profile_image || '/uploads/user-profile.jpg'}`;
+        postImageContainer.innerHTML = '';
+
+        if (post.image_url) {
+            // 이미지가 있는 경우
+            const img = document.createElement('img');
+            img.src = `http://localhost:8080${post.image_url}`;
+            img.alt = '게시글 이미지';
+            
+            img.onload = () => {
+                postImageContainer.classList.add('has-image');
+                postImageContainer.appendChild(img);
+            };
+    
+            img.onerror = () => {
+                console.error('이미지 로드 실패');
+                postImageContainer.classList.remove('has-image');
+            };
+        } else {
+            // 이미지가 없는 경우
+            postImageContainer.classList.remove('has-image');
+            postImageContainer.style.backgroundColor = '#d9d9d9';
+        }
+
         document.getElementById('likes-count').textContent = formatNumber(
             post.likes,
         );
@@ -48,11 +73,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('comments-count').textContent = formatNumber(
             post.comments_count,
         );
-
-        if (post.image_url) {
-            postImageContainer.style.backgroundImage = `url(${post.image_url})`;
-            postImageContainer.style.display = 'block';
-        }
 
         if (post.isAuthor) {
             document.querySelector(".post-actions").style.display = "flex";

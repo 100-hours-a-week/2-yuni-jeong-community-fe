@@ -11,29 +11,35 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.log(response)
             if (response.ok) {
                 const { data } = await response.json();
-                profileImage.src = `http://localhost:8080${data.profile_image || '/uploads/user-profile.jpg'}`;
+                if (profileImage) {
+                    profileImage.src = `http://localhost:8080${data.profile_image || '/uploads/user-profile.jpg'}`;
+                }
             } else {
-                profileImage.src = 'http://localhost:8080/uploads/user-profile.jpg';
+                if (profileImage) {
+                    profileImage.src = 'http://localhost:8080/uploads/user-profile.jpg';
+                }
             }
         } catch (error) {
             console.log('유저 정보 불러오기 실패 : ', error);
             profileImage.src = 'http://localhost:8080/uploads/user-profile.jpg';
         }
-    } 
+    };
 
-    profileImage.addEventListener('click', () => {
-        dropdownMenu.style.display =
-            dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
-    });
+    if (profileImage && dropdownMenu) {
+        profileImage.addEventListener('click', () => {
+            dropdownMenu.style.display =
+                dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
 
-    document.addEventListener('click', event => {
-        if (
-            !profileImage.contains(event.target) &&
-            !dropdownMenu.contains(event.target)
-        ) {
-            dropdownMenu.style.display = 'none';
-        }
-    });
+        document.addEventListener('click', event => {
+            if (
+                !profileImage.contains(event.target) &&
+                !dropdownMenu.contains(event.target)
+            ) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
+    }
 
     await fetchUserProfile();
 });
