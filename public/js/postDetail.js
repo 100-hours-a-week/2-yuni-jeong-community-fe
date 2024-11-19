@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         postDate.textContent = formatDate(post.date);
         postContent.textContent = post.content;
 
+        const postAuthorProfileImage = document.getElementById('postAuthorProfileImage');
+        postAuthorProfileImage.src = `http://localhost:8080${post.profile_image || '/uploads/user-profile.jpg'}`;
+
         document.getElementById('likes-count').textContent = formatNumber(
             post.likes,
         );
