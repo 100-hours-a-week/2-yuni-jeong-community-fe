@@ -46,25 +46,27 @@ document.addEventListener('DOMContentLoaded', () => {
             validatePasswordConfirm(passwordInput, passwordConfirmInput) &&
             validateNickname(nicknameInput)
         ) {
+            const formData = new FormData();
+            formData.append('email', emailInput.value.trim());
+            formData.append('password', passwordInput.value.trim());
+            formData.append('nickname', nicknameInput.value.trim());
+            if (profilePhotoInput.files[0]) {
+                formData.append('profile_image', profilePhotoInput.files[0]);
+            }
+
             try {
                 const response = await fetch(
                     'http://localhost:8080/auth/signup',
                     {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            email: emailInput.value.trim(),
-                            password: passwordInput.value.trim(),
-                            nickname: nicknameInput.value.trim(),
-                            profile_image: profilePhotoInput.value || '',
-                        }),
-                    },
-                );
+                        body: formData,
+                    });
 
                 const result = await response.json();
+                console.log(result);
 
                 if (response.ok) {
-                    showToastMessage('회원가입이 완료');
+                    showToastMessage('회원가입 완료');
                     setTimeout(() => (window.location.href = '/'), 1000);
                 } else {
                     showToastMessage(result.message || '회원가입 실패');

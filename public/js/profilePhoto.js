@@ -18,14 +18,24 @@ export const initializeProfilePhoto = (
                     profilePhotoHelper.style.display = 'none';
             };
             reader.readAsDataURL(file);
+        } else {
+            // 파일 선택이 취소되었을 경우 기본 이미지로 설정
+            profilePhotoContainer.style.backgroundImage = 'url(http://localhost:8080/uploads/user-profile.jpg)';
+            profilePhotoContainer.style.backgroundSize = 'cover';
+            profilePhotoContainer.style.backgroundPosition = 'center';
+            if (plusIcon) plusIcon.style.display = 'flex';
+            if (profilePhotoHelper) profilePhotoHelper.style.display = 'block';
         }
     });
 
     // 프로필 사진 제거
     profilePhotoContainer?.addEventListener('click', () => {
-        profilePhotoInput.value = '';
-        profilePhotoContainer.style.backgroundImage = 'none';
-        plusIcon.style.display = 'flex';
+        profilePhotoInput.value = ''; // 파일 입력 초기화
+        profilePhotoContainer.style.backgroundImage = 'url(http://localhost:8080/uploads/user-profile.jpg)';
+        profilePhotoContainer.style.backgroundSize = 'cover';
+        profilePhotoContainer.style.backgroundPosition = 'center';
+        if (plusIcon) plusIcon.style.display = 'flex';
         if (profilePhotoHelper) profilePhotoHelper.style.display = 'block';
     });
 };
+
