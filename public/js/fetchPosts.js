@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 ? post.title.substring(0, 26) + '...'
                 : post.title;
 
+        const profileImageUrl = post.profile_image
+            ? `http://localhost:8080${post.profile_image}`
+            : 'http://localhost:8080/uploads/profile-icon.png';
+
+        console.log(profileImageUrl)
+
         postItem.innerHTML = `
             <div class="post-title">${postTitle}</div>
             <div class="post-info-container">
@@ -27,7 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div class="post-divider"></div>
             <div class="post-author-container">
-                <div class="post-author-avatar"></div>
+                <div class="post-author-avatar">
+                    <img
+                    src="${profileImageUrl}"
+                    alt="작성자 프로필"
+                    class="post-author-profile"
+                    />
+                </div>
                 <div class="post-author-name">${post.author}</div>
             </div>
         `;
@@ -48,6 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 { credentials: 'include' },
             );
             const { data: posts } = await response.json();
+
+            console.log(posts)
 
             if (!posts || posts.length === 0) {
                 console.log('더 이상 게시글이 없습니다.');

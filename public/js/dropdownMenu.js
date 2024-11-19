@@ -1,6 +1,25 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     const profileImage = document.getElementById('profileImage');
     const dropdownMenu = document.getElementById('dropdownMenu');
+
+    const fetchUserProfile = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/auth/current', {
+                credentials: 'include'
+            })
+
+            console.log(response)
+            if (response.ok) {
+                const { data } = await response.json();
+                profileImage.src = `http://localhost:8080${data.profile_image || '/uploads/user-profile.jpg'}`;
+            } else {
+                profileImage.src = 'http://localhost:8080/uploads/user-profile.jpg';
+            }
+        } catch (error) {
+            console.log('유저 정보 불러오기 실패 : ', error);
+            profileImage.src = 'http://localhost:8080/uploads/user-profile.jpg';
+        }
+    } 
 
     profileImage.addEventListener('click', () => {
         dropdownMenu.style.display =
@@ -15,6 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdownMenu.style.display = 'none';
         }
     });
+
+    await fetchUserProfile();
 });
 
 const logout = async () => {
