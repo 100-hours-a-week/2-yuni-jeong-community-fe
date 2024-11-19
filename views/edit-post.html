@@ -9,15 +9,31 @@
     </head>
     <body>
         <header class="community-header">
-            <a href="/posts" class="back-button">&lt;</a>
-            <h1 class="community-title" onclick="location.href='/posts'">
+            <h1 class="community-title" onclick="location.href='posts'">
                 아무 말 대잔치
             </h1>
-            <img
-                alt="프로필 사진"
-                class="user-profile"
-                id="profileImage"
-            />
+            <div class="profile-container">
+                <img
+                    alt="프로필 사진"
+                    class="user-profile"
+                    id="profileImage"
+                />
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div
+                        class="dropdown-item"
+                        onclick="location.href='/profile/edit'"
+                    >
+                        회원정보 수정
+                    </div>
+                    <div
+                        class="dropdown-item"
+                        onclick="location.href='/password/change'"
+                    >
+                        비밀번호 수정
+                    </div>
+                    <div class="dropdown-item" onclick="logout()">로그아웃</div>
+                </div>
+            </div>
         </header>
 
         <div class="header-divider"></div>
