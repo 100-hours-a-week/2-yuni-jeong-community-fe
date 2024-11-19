@@ -108,7 +108,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         commentItem.classList.add('comment-item');
 
         commentItem.innerHTML = `
-            <div class="comment-author-avatar"></div>
+            <div class="comment-author-avatar">
+                <img
+                    src="http://localhost:8080${comment.profile_image || '/uploads/user-profile.jpg'}"
+                    alt="프로필 이미지"
+                    class="comment-author-profile"
+                />
+            </div>
             <div class="comment-content">
                 <div class="comment-item-header">
                     <span class="comment-author-name">${comment.author}</span>

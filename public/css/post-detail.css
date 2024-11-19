@@ -241,6 +241,13 @@
     background-color: #d9d9d9;
     border-radius: 50%;
     margin-right: 5px;
+    overflow: hidden;
+}
+
+.comment-author-profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .comment-content {
