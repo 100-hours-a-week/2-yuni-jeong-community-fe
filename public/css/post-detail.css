@@ -32,6 +32,7 @@
     height: 36px;
     background-color: #d9d9d9;
     border-radius: 50%;
+    overflow: hidden;
 }
 
 .post-author-profile {
@@ -52,7 +53,6 @@
     font-size: 14px;
     font-weight: 400;
     color: #666;
-    /* margin-left: auto; */
 }
 
 .post-actions {
@@ -94,8 +94,29 @@
     max-width: 544px;
     height: 306px;
     background-color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 16px 0;
+    overflow: hidden;
+    position: relative;
 }
+
+.post-image.has-image {
+    background-color: transparent;
+    height: auto;
+}
+
+.post-image img {
+    max-width: 100%;
+    height: auto;
+    display: none;
+}
+
+.post-image.has-image img {
+    display: block;
+}
+
 
 /* 게시글 내용 */
 .post-content {
