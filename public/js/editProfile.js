@@ -32,13 +32,19 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const { data } = await response.json();
                 emailDisplay.textContent = data.email;
                 nicknameInput.value = data.nickname;
+
                 if (data.profile_image) {
-                    profilePhotoContainer.style.backgroundImage = `url(${data.profile_image})`;
-                    profilePhotoContainer.style.backgroundSize = 'cover';
-                    profilePhotoContainer.style.backgroundPosition = 'center';
-                    plusIcon.style.display = 'none';
-                    profilePhotoHelper.style.display = 'none';
+                    profilePhotoContainer.style.backgroundImage = `url(http://localhost:8080${data.profile_image})`;
+                } else {
+                    profilePhotoContainer.style.backgroundImage = 'url(http://localhost:8080/uploads/profile-icon.png)';
                 }
+
+                profilePhotoContainer.style.backgroundSize = 'cover';
+                profilePhotoContainer.style.backgroundPosition = 'center';
+
+                if (plusIcon) plusIcon.style.display = data.profile_image ? 'none' : 'flex';
+                if (profilePhotoHelper) profilePhotoHelper.style.display = data.profile_image ? 'none' : 'block';
+
             } else {
                 console.error('사용자 정보를 불러오는 데 실패했습니다.');
                 showToastMessage('사용자 정보를 불러오는 데 실패했습니다.');
@@ -59,17 +65,23 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // 회원정보 수정 API
     const updateUserProfile = async () => {
+        const formData = new FormData();
+        formData.append('nickname', nicknameInput.value.trim());
+
+        const file = profilePhotoInput.files[0];
+        if (file) {
+            formData.append('profile_image', file);
+        } else {
+            formData.append('profile_image', '');
+        }
+
         try {
             const response = await fetch(
                 'http://localhost:8080/users/profile',
                 {
                     method: 'PUT',
                     credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        nickname: nicknameInput.value.trim(),
-                        profile_image: profilePhotoInput.value || '',
-                    }),
+                    body: formData,
                 },
             );
 
@@ -77,6 +89,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             if (response.ok) {
                 showToastMessage('수정 완료');
+                await fetchUserInfo();
             } else {
                 showToastMessage(result.message || '수정 실패');
             }
