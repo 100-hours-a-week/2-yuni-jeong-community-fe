@@ -3,7 +3,7 @@ import { formatDate, formatNumber, checkLogin } from './utils.js';
 document.addEventListener('DOMContentLoaded', async () => {
     await checkLogin();
 
-    const postId = new URLSearchParams(window.location.search).get('id');
+    const post_id = new URLSearchParams(window.location.search).get('id');
     const commentInput = document.querySelector('.comment-input');
     const submitButton = document.querySelector('.comment-submit-button');
     const postTitle = document.querySelector('.post-title');
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fetchPost = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${postId}`,
+                `http://localhost:8080/posts/${post_id}`,
                 {
                     credentials: 'include',
                 },
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fetchComments = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${postId}/comments`,
+                `http://localhost:8080/posts/${post_id}/comments`,
                 {
                     credentials: 'include',
                 },
@@ -184,10 +184,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    const deleteComment = async commentId => {
+    const deleteComment = async comment_id => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${postId}/comments/${commentId}`,
+                `http://localhost:8080/posts/${post_id}/comments/${comment_id}`,
                 {
                     method: 'DELETE',
                     credentials: 'include',
@@ -212,8 +212,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!content) return;
 
         const url = editingCommentId
-            ? `http://localhost:8080/posts/${postId}/comments/${editingCommentId}`
-            : `http://localhost:8080/posts/${postId}/comments`;
+            ? `http://localhost:8080/posts/${post_id}/comments/${editingCommentId}`
+            : `http://localhost:8080/posts/${post_id}/comments`;
         const method = editingCommentId ? 'PATCH' : 'POST';
         const currentUserId = await getCurrentUserId();
 
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             try {
                 const response = await fetch(
-                    `http://localhost:8080/posts/${postId}`,
+                    `http://localhost:8080/posts/${post_id}`,
                     {
                         method: 'DELETE',
                         credentials: 'include',
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const initialize = () => {
-        if (!postId) {
+        if (!post_id) {
             console.error('Invalid post ID.');
             return;
         }
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         deleteButton?.addEventListener('click', deletePost);
 
         document.querySelector('.edit-button').addEventListener('click', () => {
-            window.location.href = `/post/edit?id=${postId}`;
+            window.location.href = `/post/edit?id=${post_id}`;
         });
     };
 

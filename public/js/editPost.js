@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const titleInput = document.getElementById('post-title');
     const contentInput = document.getElementById('post-content');
     const editButton = document.getElementById('edit-button');
-    const postId = new URLSearchParams(window.location.search).get('id');
+    const post_id = new URLSearchParams(window.location.search).get('id');
     const imageInput = document.getElementById('post-image');
     const fileUploadText = document.querySelector('.file-upload-text');
 
-    if (!postId) {
+    if (!post_id) {
         console.error('Invalid post ID.');
         return;
     }
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fetchPostData = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${postId}`,
+                `http://localhost:8080/posts/${post_id}`,
             );
             const { data: post } = await response.json();
 
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${postId}`,
+                `http://localhost:8080/posts/${post_id}`,
                 {
                     method: 'PATCH',
                     credentials: 'include',
