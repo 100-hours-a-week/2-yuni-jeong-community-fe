@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 로그인 버튼 활성화 상태 업데이트
     const updateLoginButtonState = () => {
         const isValid =
-            validateEmail(emailInput) && validatePassword(passwordInput);
+            validateEmail(emailInput, 'login') && validatePassword(passwordInput);
         updateButtonState(loginButton, isValid);
     };
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loginButton.addEventListener('click', async e => {
         e.preventDefault();
 
-        if (validateEmail(emailInput) && validatePassword(passwordInput)) {
+        if (validateEmail(emailInput, 'login') && validatePassword(passwordInput)) {
             try {
                 const response = await fetch(
                     'http://localhost:8080/auth/login',
