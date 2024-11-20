@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     // 비밀번호 변경 API 호출
-    changePasswordButton.addEventListener('click', async e => {
+    changePasswordButton.addEventListener('click', async (e) => {
         e.preventDefault();
 
         if (
@@ -26,17 +26,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             validatePasswordConfirm(passwordInput, passwordConfirmInput)
         ) {
             try {
-                const response = await fetch(
-                    'http://localhost:8080/users/password',
-                    {
-                        method: 'PATCH',
-                        credentials: 'include',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            new_password: passwordInput.value,
-                        }),
-                    },
-                );
+                const response = await fetch('http://localhost:8080/users/password', {
+                    method: 'PATCH',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        new_password: passwordInput?.value?.trim(),
+                    }),
+                });
 
                 const result = await response.json();
 
