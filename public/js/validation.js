@@ -1,4 +1,4 @@
-export const validateEmail = emailInput => {
+export const validateEmail = async (emailInput, context = 'signup') => {
     if (!emailInput) return true;
 
     const emailValue = emailInput?.value.trim();
@@ -13,9 +13,25 @@ export const validateEmail = emailInput => {
         emailHelper.innerHTML =
             '*올바른 이메일 주소 형식을 입력해주세요.<br>(예: example@example.com)';
         return false;
-    } else {
-        emailHelper.textContent = '';
-        return true;
+    } 
+
+    // 회원가입 시에만 이메일 중복 검사
+    if (context === 'signup'){
+        try {
+            const response = await fetch(
+                `http://localhost:8080/users/check-email?email=${emailValue}`,
+            );
+            if (!response.ok) {
+                const { message } = await response.json();
+                emailHelper.textContent = `*${message}`;
+                return false;
+            }
+            emailHelper.textContent = '';
+            return true;
+        } catch (error) {
+            console.error('Error checking email:', error);
+            return false;
+        }
     }
 };
 
@@ -63,7 +79,7 @@ export const validatePasswordConfirm = (
     }
 };
 
-export const validateNickname = nicknameInput => {
+export const validateNickname = async nicknameInput => {
     if (!nicknameInput) return true;
 
     const nicknameValue = nicknameInput.value.trim();
@@ -78,9 +94,21 @@ export const validateNickname = nicknameInput => {
     } else if (nicknameValue.length > 10) {
         nicknameHelper.textContent = '*닉네임은 최대 10자까지 가능합니다.';
         return false;
-    } else {
+    } 
+    try {
+        const response = await fetch(
+            `http://localhost:8080/users/check-nickname?nickname=${nicknameValue}`,
+        );
+        if (!response.ok) {
+            const { message } = await response.json();
+            nicknameHelper.textContent = `*${message}`;
+            return false;
+        }
         nicknameHelper.textContent = '';
         return true;
+    } catch (error) {
+        console.error('Error checking nickname:', error);
+        return false;
     }
 };
 
