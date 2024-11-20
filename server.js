@@ -40,6 +40,14 @@ app.get('/post/edit', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'edit-post.html'));
 });
 
+app.get('/terms', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'terms', 'terms.html'));
+});
+
+app.get('/privacy', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'terms', 'privacy.html'));
+});
+
 app.listen(3000, () => {
     console.log('http://localhost:3000 에서 서버 실행중');
 });
