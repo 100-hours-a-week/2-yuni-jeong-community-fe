@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     <span>댓글 ${post.comments_count}</span>
                     <span>조회수 ${post.views}</span>
                 </div>
-                <div class="post-info-right">${formatDate(post.date)}</div>
+                <div class="post-info-right">${formatDate(post.created_at)}</div>
             </div>
             <div class="post-divider"></div>
             <div class="post-author-container">
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 return;
             }
 
-            posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            posts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
             posts.forEach(renderPost);
 

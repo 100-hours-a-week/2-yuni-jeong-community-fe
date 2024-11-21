@@ -25,17 +25,26 @@ export const showToastMessage = message => {
     }, 2000);
 };
 
-export const formatDate = dateString => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
+export const formatDate = (dateString) => {
+    if (!dateString) return '알 수 없음';
 
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    try {
+        const date = new Date(dateString); // UTC 시간 생성
+        const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000); // 로컬 시간 변환
+        const year = localDate.getFullYear();
+        const month = String(localDate.getMonth() + 1).padStart(2, '0');
+        const day = String(localDate.getDate()).padStart(2, '0');
+        const hours = String(localDate.getHours()).padStart(2, '0');
+        const minutes = String(localDate.getMinutes()).padStart(2, '0');
+        const seconds = String(localDate.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    } catch (error) {
+        console.error('날짜 포맷 오류:', error);
+        return '알 수 없음';
+    }
 };
+
+
 
 export const formatNumber = (num) => (
     num >= 100000 ? `${Math.floor(num / 1000)}k` :
