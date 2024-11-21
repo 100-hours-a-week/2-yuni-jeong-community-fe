@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const postContent = document.querySelector('.post-content');
     const postImageContainer = document.querySelector('.post-image');
     const deleteButton = document.querySelector('.delete-button');
+    const likeButton = document.getElementById('likes-button');
+    const likesCountElement = document.getElementById('likes-count');
 
     let editingCommentId = null;
 
@@ -35,7 +37,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    const renderPost = post => {
+    const renderPost =async(post) => {
+        const currentUserId = await getCurrentUserId();
+
         postTitle.textContent = post.title;
         postAuthor.textContent = post.author;
         postDate.textContent = formatDate(post.date);
@@ -80,6 +84,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelector(".post-actions").style.display = "flex";
         } else {
             document.querySelector(".post-actions").style.display = "none";
+        }
+
+        if (post.isLiked) {
+            likeButton.classList.add('liked');
+        } else {
+            likeButton.classList.remove('liked');
         }
     };
 
@@ -279,6 +289,37 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         };
     };
+
+    const toggleLike = async () => {
+        try {
+            const response = await fetch(
+                `http://localhost:8080/posts/${post_id}/like`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                }
+            );
+
+            const result = await response.json();
+
+            if (response.ok) {
+                likesCountElement.textContent = formatNumber(result.data.likes);
+
+                if (result.data.isLiked) {
+                    likeButton.classList.add('liked');
+                } else {
+                    likeButton.classList.remove('liked');
+                }
+            } else {
+                alert(result.message || '좋아요 처리 실패');
+            }
+        } catch (error) {
+            console.error('Error toggling like:', error);
+            alert('좋아요 처리 중 문제가 발생했습니다.');
+        }
+    };
+
+    likeButton.addEventListener('click', toggleLike);
 
     const handleCommentInput = () => {
         commentInput.addEventListener('input', () => {
