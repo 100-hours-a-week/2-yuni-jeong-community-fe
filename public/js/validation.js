@@ -33,6 +33,9 @@ export const validateEmail = async (emailInput, context = 'signup') => {
             return false;
         }
     }
+
+    emailHelper.textContent = '';
+    return true;
 };
 
 export const validatePassword = passwordInput => {
