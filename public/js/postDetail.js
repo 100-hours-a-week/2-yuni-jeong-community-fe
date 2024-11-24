@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
             // 이미지가 없는 경우
             postImageContainer.classList.remove('has-image');
-            postImageContainer.style.backgroundColor = '#d9d9d9';
+            postImageContainer.style.backgroundColor = '#dde8fd';
         }
 
         document.getElementById('likes-count').textContent = formatNumber(
@@ -326,8 +326,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const isCommentFilled = commentInput.value.trim().length > 0;
             submitButton.disabled = !isCommentFilled;
             submitButton.style.backgroundColor = isCommentFilled
-                ? '#7F6AEE'
-                : '#ACA0EB';
+                ? '#272f7a'
+                : '#708dc7';
         });
     };
 

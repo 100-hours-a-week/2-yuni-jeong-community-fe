@@ -1,7 +1,7 @@
 export const updateButtonState = (button, isValid) => {
     if (!button) return;
     button.disabled = !isValid;
-    button.style.backgroundColor = isValid ? '#7F6AEE' : '#ACA0EB';
+    button.style.backgroundColor = isValid ? '#272f7a' : '#708dc7';
 };
 
 export const showToastMessage = message => {
