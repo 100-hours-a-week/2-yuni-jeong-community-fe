@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         postTitle.textContent = post.title;
         postAuthor.textContent = post.author;
-        postDate.textContent = formatDate(post.date);
+        postDate.textContent = formatDate(post.created_at);
         postContent.textContent = post.content;
 
         const postAuthorProfileImage = document.getElementById('postAuthorProfileImage');
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
             // 이미지가 없는 경우
             postImageContainer.classList.remove('has-image');
-            postImageContainer.style.backgroundColor = '#d9d9d9';
+            postImageContainer.style.backgroundColor = '#dde8fd';
         }
 
         document.getElementById('likes-count').textContent = formatNumber(
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="comment-content">
                 <div class="comment-item-header">
                     <span class="comment-author-name">${comment.author}</span>
-                    <span class="comment-date">${formatDate(comment.date)}</span>
+                    <span class="comment-date">${formatDate(comment.created_at)}</span>
                     <div class="comment-actions">
                     ${comment.isAuthor ? `
                         <button class="edit-button">수정</button>
@@ -326,8 +326,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const isCommentFilled = commentInput.value.trim().length > 0;
             submitButton.disabled = !isCommentFilled;
             submitButton.style.backgroundColor = isCommentFilled
-                ? '#7F6AEE'
-                : '#ACA0EB';
+                ? '#272f7a'
+                : '#708dc7';
         });
     };
 

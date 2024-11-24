@@ -32,7 +32,7 @@
 .create-post-button {
     width: 138px;
     height: 39px;
-    background-color: #aca0eb;
+    background-color: #708dc7;
     color: #ffffff;
     font-family: 'Pretendard-Medium';
     font-size: 16px;
@@ -105,7 +105,7 @@
 .post-author-avatar {
     width: 36px;
     height: 36px;
-    background-color: #d9d9d9;
+    background-color: #ffffff;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -128,7 +128,7 @@
 .create-post-button {
     width: 138px;
     height: 39px;
-    background-color: #aca0eb;
+    background-color: #708dc7;
     color: #ffffff;
     font-family: 'Pretendard-Medium';
     font-size: 16px;
@@ -142,7 +142,7 @@
 }
 
 .create-post-button:hover {
-    background-color: #7f6aee;
+    background-color: #272f7a;
 }
 
 .post-title {

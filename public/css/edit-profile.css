@@ -2,7 +2,7 @@
     width: auto;
     height: 46px;
     padding: 0 20px;
-    background-color: #aca0eb;
+    background-color: #708dc7;
     color: #ffffff;
     font-family: 'Pretendard-Medium';
     font-size: 18px;
@@ -15,10 +15,10 @@
 }
 
 .saveChangesButton:enabled {
-    background-color: #7f6aee;
+    background-color: #272f7a;
 }
 .saveChangesButton:disabled {
-    background-color: #aca0eb;
+    background-color: #708dc7;
     cursor: not-allowed;
 }
 
@@ -28,7 +28,7 @@
     font-size: 15px;
     font-family: 'Pretendard-Medium';
     color: #000000;
-    background-color: #f4f5f7;
+    background-color: #cddafd;
     border: none;
     box-sizing: border-box;
 }
