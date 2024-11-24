@@ -27,7 +27,7 @@
     border: 1px solid #708dc7;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #dde8fd;
+    background-color: #ffffff;
 }
 
 #post-title::placeholder {
@@ -43,7 +43,7 @@
     border: 1px solid #708dc7;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #dde8fd;
+    background-color: #ffffff;
     resize: none;
 }
 
