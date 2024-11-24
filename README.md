@@ -6,6 +6,9 @@
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
+## 🎥 소개 영상
+[소개 영상 바로가기](https://drive.google.com/file/d/1MwC9VxA4xt1x53nneWBQRIIzJOQN6nAh/view?usp=sharing)
+
 ## 🌎 실행 방법
 **1. git clone**
 ```bash
