@@ -56,5 +56,5 @@ app.get('/privacy', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log(`http://{HOST}:{PORT} 에서 서버 실행중`);
+    console.log(`http://${HOST}:${PORT} 에서 서버 실행중`);
 });
