@@ -56,7 +56,7 @@ export const formatNumber = (num) => (
 
 export const checkLogin = async () => {
     try {
-        const response = await fetch(`${API_BASE_URL}auth/current`, {
+        const response = await fetch(`${API_BASE_URL}/auth/current`, {
             credentials: 'include',
         });
 
