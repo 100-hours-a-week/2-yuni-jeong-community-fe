@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 import { validateTitle, validateContent } from './validation.js';
 import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fetchPostData = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${post_id}`,
+                `${API_BASE_URL}/posts/${post_id}`,
             );
             const { data: post } = await response.json();
 
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${post_id}`,
+                `${API_BASE_URL}/posts/${post_id}`,
                 {
                     method: 'PATCH',
                     credentials: 'include',

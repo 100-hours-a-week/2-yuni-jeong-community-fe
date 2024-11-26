@@ -1,10 +1,12 @@
+import { API_BASE_URL } from './config.js';
+
 document.addEventListener('DOMContentLoaded', async function () {
     const profileImage = document.getElementById('profileImage');
     const dropdownMenu = document.getElementById('dropdownMenu');
 
     const fetchUserProfile = async () => {
         try {
-            const response = await fetch('http://localhost:8080/auth/current', {
+            const response = await fetch(`${API_BASE_URL}/auth/current'`, {
                 credentials: 'include'
             })
 
@@ -12,16 +14,16 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (response.ok) {
                 const { data } = await response.json();
                 if (profileImage) {
-                    profileImage.src = `http://localhost:8080${data.profile_image || '/uploads/user-profile.jpg'}`;
+                    profileImage.src = `${API_BASE_URL}${data.profile_image || '/uploads/user-profile.jpg'}`;
                 }
             } else {
                 if (profileImage) {
-                    profileImage.src = 'http://localhost:8080/uploads/user-profile.jpg';
+                    profileImage.src = `${API_BASE_URL}/uploads/user-profile.jpg`;
                 }
             }
         } catch (error) {
             console.log('유저 정보 불러오기 실패 : ', error);
-            profileImage.src = 'http://localhost:8080/uploads/user-profile.jpg';
+            profileImage.src = `${API_BASE_URL}/uploads/user-profile.jpg`;
         }
     };
 
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 const logout = async () => {
     try {
-        const response = await fetch('http://localhost:8080/auth/logout', {
+        const response = await fetch(`${API_BASE_URL}/auth/logout`, {
             method: 'POST',
             credentials: 'include',
         });

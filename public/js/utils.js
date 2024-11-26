@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 export const updateButtonState = (button, isValid) => {
     if (!button) return;
     button.disabled = !isValid;
@@ -55,7 +56,7 @@ export const formatNumber = (num) => (
 
 export const checkLogin = async () => {
     try {
-        const response = await fetch('http://localhost:8080/auth/current', {
+        const response = await fetch(`${API_BASE_URL}auth/current`, {
             credentials: 'include',
         });
 
