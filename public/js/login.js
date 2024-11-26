@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 import { validateEmail, validatePassword } from './validation.js';
 import { updateButtonState, showToastMessage } from './utils.js';
 
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (validateEmail(emailInput, 'login') && validatePassword(passwordInput)) {
             try {
                 const response = await fetch(
-                    'http://localhost:8080/auth/login',
+                    `${API_BASE_URL}/auth/login`,
                     {
                         method: 'POST',
                         credentials: 'include',

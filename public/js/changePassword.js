@@ -1,5 +1,6 @@
 import { validatePassword, validatePasswordConfirm } from './validation.js';
 import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
+import { API_BASE_URL } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     await checkLogin();
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             validatePasswordConfirm(passwordInput, passwordConfirmInput)
         ) {
             try {
-                const response = await fetch('http://localhost:8080/users/password', {
+                const response = await fetch(`${API_BASE_URL}/users/password`, {
                     method: 'PATCH',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },

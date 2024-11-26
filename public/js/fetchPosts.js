@@ -1,4 +1,5 @@
 import { formatDate, checkLogin } from './utils.js';
+import { API_BASE_URL } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
     await checkLogin();
@@ -18,8 +19,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 : post.title;
 
         const profileImageUrl = post.profile_image
-            ? `http://localhost:8080${post.profile_image}`
-            : 'http://localhost:8080/uploads/user-profile.jpg';
+            ? `${API_BASE_URL}${post.profile_image}`
+            : `${API_BASE_URL}/uploads/user-profile.jpg`;
 
         postItem.innerHTML = `
             <div class="post-title">${postTitle}</div>
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         loading = true;
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/page/${page}`,
+                `${API_BASE_URL}/posts/page/${page}`,
                 { credentials: 'include' },
             );
             const { data: posts } = await response.json();

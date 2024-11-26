@@ -1,6 +1,7 @@
 import { validateNickname } from './validation.js';
 import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 import { initializeProfilePhoto } from './profilePhoto.js';
+import { API_BASE_URL } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
     await checkLogin();
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // 현재 유저 정보 불러오기
     const fetchUserInfo = async () => {
         try {
-            const response = await fetch('http://localhost:8080/auth/current', {
+            const response = await fetch(`${API_BASE_URL}/auth/current`, {
                 credentials: 'include',
             });
             if (response.ok) {
@@ -35,9 +36,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 nicknameInput.value = data.nickname;
 
                 if (data.profile_image) {
-                    profilePhotoContainer.style.backgroundImage = `url(http://localhost:8080${data.profile_image})`;
+                    profilePhotoContainer.style.backgroundImage = `url(${API_BASE_URL}${data.profile_image})`;
                 } else {
-                    profilePhotoContainer.style.backgroundImage = 'url(http://localhost:8080/uploads/user-profile.jpg)';
+                    profilePhotoContainer.style.backgroundImage = `url(${API_BASE_URL}/uploads/user-profile.jpg)`;
                 }
 
                 profilePhotoContainer.style.backgroundSize = 'cover';
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         try {
             const response = await fetch(
-                'http://localhost:8080/users/profile',
+                `${API_BASE_URL}/users/profile`,
                 {
                     method: 'PATCH',
                     credentials: 'include',
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const deleteAccount = async () => {
         try {
-            const response = await fetch('http://localhost:8080/users', {
+            const response = await fetch(`${API_BASE_URL}/users`, {
                 method: 'DELETE',
                 credentials: 'include',
             });

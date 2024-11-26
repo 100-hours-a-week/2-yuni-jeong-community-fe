@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 export const validateEmail = async (emailInput, context = 'signup') => {
     if (!emailInput) return true;
 
@@ -19,7 +20,7 @@ export const validateEmail = async (emailInput, context = 'signup') => {
     if (context === 'signup'){
         try {
             const response = await fetch(
-                `http://localhost:8080/users/check-email?email=${emailValue}`,
+                `${API_BASE_URL}/users/check-email?email=${emailValue}`,
             );
             if (!response.ok) {
                 const { message } = await response.json();
@@ -100,7 +101,7 @@ export const validateNickname = async nicknameInput => {
     } 
     try {
         const response = await fetch(
-            `http://localhost:8080/users/check-nickname?nickname=${nicknameValue}`,
+            `${API_BASE_URL}/users/check-nickname?nickname=${nicknameValue}`,
         );
         if (!response.ok) {
             const { message } = await response.json();

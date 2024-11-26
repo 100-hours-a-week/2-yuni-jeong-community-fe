@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 import { validateTitle, validateContent } from './validation.js';
 import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             try {
-                const response = await fetch('http://localhost:8080/posts', {
+                const response = await fetch(`${API_BASE_URL}/posts`, {
                     method: 'POST',
                     credentials: 'include',
                     body: formData,

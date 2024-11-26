@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 import {
     validateEmail,
     validatePassword,
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const checkEmailDuplicate = async email => {
         try {
-            const response = await fetch(`http://localhost:8080/users/check-email?email=${email}`);
+            const response = await fetch(`${API_BASE_URL}/users/check-email?email=${email}`);
             if (!response.ok) {
                 const { message } = await response.json();
                 showToastMessage(message || '이메일 중복 검사 실패');
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const checkNicknameDuplicate = async nickname => {
         try {
-            const response = await fetch(`http://localhost:8080/users/check-nickname?nickname=${nickname}`);
+            const response = await fetch(`${API_BASE_URL}/users/check-nickname?nickname=${nickname}`);
             if (!response.ok) {
                 const { message } = await response.json();
                 showToastMessage(message || '닉네임 중복 검사 실패');
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 const response = await fetch(
-                    'http://localhost:8080/auth/signup',
+                    `${API_BASE_URL}/auth/signup`,
                     {
                         method: 'POST',
                         body: formData,

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 import { formatDate, formatNumber, checkLogin } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 현재 유저 ID 반환
     const getCurrentUserId = async () => {
         try {
-            const response = await fetch('http://localhost:8080/auth/current', {
+            const response = await fetch(`${API_BASE_URL}/auth/current`, {
                 credentials: 'include',
             });
     
@@ -46,13 +47,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         postContent.textContent = post.content;
 
         const postAuthorProfileImage = document.getElementById('postAuthorProfileImage');
-        postAuthorProfileImage.src = `http://localhost:8080${post.profile_image || '/uploads/user-profile.jpg'}`;
+        postAuthorProfileImage.src = `${API_BASE_URL}${post.profile_image || '/uploads/user-profile.jpg'}`;
         postImageContainer.innerHTML = '';
 
         if (post.image_url) {
             // 이미지가 있는 경우
             const img = document.createElement('img');
-            img.src = `http://localhost:8080${post.image_url}`;
+            img.src = `${API_BASE_URL}${post.image_url}`;
             img.alt = '게시글 이미지';
             
             img.onload = () => {
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fetchPost = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${post_id}`,
+                `${API_BASE_URL}/posts/${post_id}`,
                 {
                     credentials: 'include',
                 },
@@ -122,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         commentItem.innerHTML = `
             <div class="comment-author-avatar">
                 <img
-                    src="http://localhost:8080${comment.profile_image || '/uploads/user-profile.jpg'}"
+                    src="${API_BASE_URL}${comment.profile_image || '/uploads/user-profile.jpg'}"
                     alt="프로필 이미지"
                     class="comment-author-profile"
                 />
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fetchComments = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${post_id}/comments`,
+                `${API_BASE_URL}/posts/${post_id}/comments`,
                 {
                     credentials: 'include',
                 },
@@ -197,7 +198,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const deleteComment = async comment_id => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${post_id}/comments/${comment_id}`,
+                `${API_BASE_URL}/posts/${post_id}/comments/${comment_id}`,
                 {
                     method: 'DELETE',
                     credentials: 'include',
@@ -222,8 +223,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!content) return;
 
         const url = editingCommentId
-            ? `http://localhost:8080/posts/${post_id}/comments/${editingCommentId}`
-            : `http://localhost:8080/posts/${post_id}/comments`;
+            ? `${API_BASE_URL}/posts/${post_id}/comments/${editingCommentId}`
+            : `${API_BASE_URL}/posts/${post_id}/comments`;
         const method = editingCommentId ? 'PATCH' : 'POST';
         const currentUserId = await getCurrentUserId();
 
@@ -269,7 +270,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             try {
                 const response = await fetch(
-                    `http://localhost:8080/posts/${post_id}`,
+                    `${API_BASE_URL}/posts/${post_id}`,
                     {
                         method: 'DELETE',
                         credentials: 'include',
@@ -293,7 +294,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const toggleLike = async () => {
         try {
             const response = await fetch(
-                `http://localhost:8080/posts/${post_id}/like`,
+                `${API_BASE_URL}/posts/${post_id}/like`,
                 {
                     method: 'POST',
                     credentials: 'include',
