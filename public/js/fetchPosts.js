@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 : post.title;
 
         const profileImageUrl = post.profile_image
-            ? `${API_BASE_URL}${post.profile_image}`
+            ? `${API_BASE_URL}/${post.profile_image}`
             : `${API_BASE_URL}/uploads/user-profile.jpg`;
 
         postItem.innerHTML = `
