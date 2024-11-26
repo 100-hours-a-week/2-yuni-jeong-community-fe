@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const fetchUserProfile = async () => {
         try {
-            const response = await fetch(`${API_BASE_URL}/auth/current'`, {
+            const response = await fetch(`${API_BASE_URL}/auth/current`, {
                 credentials: 'include'
             })
 
