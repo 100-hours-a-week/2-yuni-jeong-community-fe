@@ -11,8 +11,6 @@ const __dirname = path.dirname(__filename);
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
 
-console.log(HOST)
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
@@ -56,5 +54,5 @@ app.get('/privacy', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log(`http://${HOST}:${PORT} 에서 서버 실행중`);
+    console.log(`http://${HOST}:${PORT} 에서 서버 실행 중`);
 });

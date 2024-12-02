@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (plusIcon) plusIcon.style.display = data.profile_image ? 'none' : 'flex';
                 if (profilePhotoHelper) profilePhotoHelper.style.display = data.profile_image ? 'none' : 'block';
 
+                updateButtonState(saveButton, false);
             } else {
                 console.error('사용자 정보를 불러오는 데 실패했습니다.');
                 showToastMessage('사용자 정보를 불러오는 데 실패했습니다.');
@@ -60,8 +61,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     };
 
     // 회원정보 수정 버튼 활성화 상태 업데이트
-    const updateSaveButtonState = () => {
-        const isFormValid = validateNickname(nicknameInput);
+    const updateSaveButtonState = async () => {
+        const isFormValid = await validateNickname(nicknameInput);
         updateButtonState(saveButton, isFormValid);
     };
 
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (file) {
             formData.append('profile_image', file);
         } else {
-            formData.append('profile_image', '');
+            formData.append('profile_image', 'default');
         }
 
         try {
@@ -140,7 +141,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // 저장 버튼 클릭 이벤트
     saveButton?.addEventListener('click', async e => {
         e.preventDefault();
-        if (validateNickname(nicknameInput)) {
+        if (await validateNickname(nicknameInput)) {
             await updateUserProfile();
         }
     });
