@@ -49,7 +49,7 @@ export const validatePassword = passwordInput => {
         passwordHelper.textContent = '*비밀번호를 입력해주세요.';
         return false;
     } else if (
-        !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}/.test(
+        !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~`])[A-Za-z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~`]{8,20}/.test(
             passwordValue,
         )
     ) {
