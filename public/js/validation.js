@@ -83,7 +83,7 @@ export const validatePasswordConfirm = (
     }
 };
 
-export const validateNickname = async nicknameInput => {
+export const validateNickname = async (nicknameInput, context = 'signup') => {
     if (!nicknameInput) return true;
 
     const nicknameValue = nicknameInput.value.trim();
@@ -100,11 +100,25 @@ export const validateNickname = async nicknameInput => {
         return false;
     } 
     try {
-        const response = await fetch(
+        // 프로필 수정일 때
+        if (context === 'edit') {
+            const response = await fetch(`${API_BASE_URL}/auth/current`, {
+                credentials: 'include',
+            });
+            const { data } = await response.json();
+
+            // 자신의 닉네임은 이메일 중복 검사 안함
+            if (data.nickname === nicknameValue) {
+                nicknameHelper.textContent = '';
+                return true;
+            }
+        }
+
+        const checkResponse = await fetch(
             `${API_BASE_URL}/users/check-nickname?nickname=${nicknameValue}`,
         );
-        if (!response.ok) {
-            const { message } = await response.json();
+        if (!checkResponse.ok) {
+            const { message } = await checkResponse.json();
             nicknameHelper.textContent = `*${message}`;
             return false;
         }

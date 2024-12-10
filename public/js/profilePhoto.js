@@ -1,4 +1,4 @@
-import { API_BASE_URL } from './config.js';
+import { DEFAULT_PROFILE_IMAGE } from './config.js';
 export const initializeProfilePhoto = (
     profilePhotoInput,
     profilePhotoContainer,
@@ -21,22 +21,22 @@ export const initializeProfilePhoto = (
             reader.readAsDataURL(file);
         } else {
             // 파일 선택이 취소되었을 경우 기본 이미지로 설정
-            profilePhotoContainer.style.backgroundImage = `url(${API_BASE_URL}/uploads/user-profile.jpg)`;
-            profilePhotoContainer.style.backgroundSize = 'cover';
-            profilePhotoContainer.style.backgroundPosition = 'center';
-            if (plusIcon) plusIcon.style.display = 'flex';
-            if (profilePhotoHelper) profilePhotoHelper.style.display = 'block';
+            resetToDefaultProfileImage(profilePhotoContainer, plusIcon, profilePhotoHelper);
         }
     });
 
     // 프로필 사진 제거
     profilePhotoContainer?.addEventListener('click', () => {
         profilePhotoInput.value = ''; // 파일 입력 초기화
-        profilePhotoContainer.style.backgroundImage = `url(${API_BASE_URL}/uploads/user-profile.jpg)`;
-        profilePhotoContainer.style.backgroundSize = 'cover';
-        profilePhotoContainer.style.backgroundPosition = 'center';
-        if (plusIcon) plusIcon.style.display = 'flex';
-        if (profilePhotoHelper) profilePhotoHelper.style.display = 'block';
+        resetToDefaultProfileImage(profilePhotoContainer, plusIcon, profilePhotoHelper);
     });
+};
+
+const resetToDefaultProfileImage = (profilePhotoContainer, plusIcon, profilePhotoHelper) => {
+    profilePhotoContainer.style.backgroundImage = `url(${DEFAULT_PROFILE_IMAGE})`;
+    profilePhotoContainer.style.backgroundSize = 'cover';
+    profilePhotoContainer.style.backgroundPosition = 'center';
+    if (plusIcon) plusIcon.style.display = 'flex';
+    if (profilePhotoHelper) profilePhotoHelper.style.display = 'block';
 };
 

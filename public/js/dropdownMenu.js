@@ -1,4 +1,4 @@
-import { API_BASE_URL } from './config.js';
+import { DEFAULT_PROFILE_IMAGE, API_BASE_URL } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
     const profileImage = document.getElementById('profileImage');
@@ -14,16 +14,16 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (response.ok) {
                 const { data } = await response.json();
                 if (profileImage) {
-                    profileImage.src = `${API_BASE_URL}${data.profile_image || '/uploads/user-profile.jpg'}`;
+                    profileImage.src = data.profile_image || DEFAULT_PROFILE_IMAGE;
                 }
             } else {
                 if (profileImage) {
-                    profileImage.src = `${API_BASE_URL}/uploads/user-profile.jpg`;
+                    profileImage.src = DEFAULT_PROFILE_IMAGE;
                 }
             }
         } catch (error) {
             console.log('유저 정보 불러오기 실패 : ', error);
-            profileImage.src = `${API_BASE_URL}/uploads/user-profile.jpg`;
+            profileImage.src = DEFAULT_PROFILE_IMAGE;
         }
     };
 

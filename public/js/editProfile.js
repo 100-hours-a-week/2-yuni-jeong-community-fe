@@ -1,7 +1,7 @@
 import { validateNickname } from './validation.js';
 import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 import { initializeProfilePhoto } from './profilePhoto.js';
-import { API_BASE_URL } from './config.js';
+import { API_BASE_URL, DEFAULT_PROFILE_IMAGE } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
     await checkLogin();
@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         plusIcon,
     );
 
+    let originalNickname = '';
+    let originalProfileImage = '';
+
     // 현재 유저 정보 불러오기
     const fetchUserInfo = async () => {
         try {
@@ -34,13 +37,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const { data } = await response.json();
                 emailDisplay.textContent = data.email;
                 nicknameInput.value = data.nickname;
+                originalNickname = data.nickname;
+                originalProfileImage = data.profile_image || DEFAULT_PROFILE_IMAGE;
 
-                if (data.profile_image) {
-                    profilePhotoContainer.style.backgroundImage = `url(${API_BASE_URL}${data.profile_image})`;
-                } else {
-                    profilePhotoContainer.style.backgroundImage = `url(${API_BASE_URL}/uploads/user-profile.jpg)`;
-                }
-
+                profilePhotoContainer.style.backgroundImage = `url(${originalProfileImage})`;
                 profilePhotoContainer.style.backgroundSize = 'cover';
                 profilePhotoContainer.style.backgroundPosition = 'center';
 
@@ -62,14 +62,18 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // 회원정보 수정 버튼 활성화 상태 업데이트
     const updateSaveButtonState = async () => {
-        const isFormValid = await validateNickname(nicknameInput);
-        updateButtonState(saveButton, isFormValid);
+        const isNicknameChanged = nicknameInput.value.trim() !== originalNickname && (await validateNickname(nicknameInput, 'edit'));
+        const isProfileImageChanged = profilePhotoInput.files.length > 0;
+
+        updateButtonState(saveButton, isNicknameChanged || isProfileImageChanged);
     };
 
     // 회원정보 수정 API
     const updateUserProfile = async () => {
         const formData = new FormData();
-        formData.append('nickname', nicknameInput.value.trim());
+        
+        const newNickname = nicknameInput.value.trim();
+        formData.append('nickname', newNickname);
 
         const file = profilePhotoInput.files[0];
         if (file) {
@@ -141,13 +145,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     // 저장 버튼 클릭 이벤트
     saveButton?.addEventListener('click', async e => {
         e.preventDefault();
-        if (await validateNickname(nicknameInput)) {
+        if (await validateNickname(nicknameInput, 'edit')) {
             await updateUserProfile();
         }
     });
 
     // 입력 이벤트 리스너 추가
     nicknameInput?.addEventListener('input', updateSaveButtonState);
+    profilePhotoInput?.addEventListener('change', updateSaveButtonState);
 
     // 초기화
     await fetchUserInfo();
