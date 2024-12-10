@@ -1,4 +1,4 @@
-import { API_BASE_URL } from './config.js';
+import { API_BASE_URL, DEFAULT_PROFILE_IMAGE } from './config.js';
 import { formatDate, formatNumber, checkLogin } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         postContent.textContent = post.content;
 
         const postAuthorProfileImage = document.getElementById('postAuthorProfileImage');
-        postAuthorProfileImage.src = `${API_BASE_URL}${post.profile_image || '/uploads/user-profile.jpg'}`;
+        postAuthorProfileImage.src = post.profile_image || DEFAULT_PROFILE_IMAGE;
         postImageContainer.innerHTML = '';
 
         if (post.image_url) {
             // 이미지가 있는 경우
             const img = document.createElement('img');
-            img.src = `${API_BASE_URL}${post.image_url}`;
+            img.src = post.image_url;
             img.alt = '게시글 이미지';
             
             img.onload = () => {
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         commentItem.innerHTML = `
             <div class="comment-author-avatar">
                 <img
-                    src="${API_BASE_URL}${comment.profile_image || '/uploads/user-profile.jpg'}"
+                    src="${comment.profile_image || DEFAULT_PROFILE_IMAGE}"
                     alt="프로필 이미지"
                     class="comment-author-profile"
                 />

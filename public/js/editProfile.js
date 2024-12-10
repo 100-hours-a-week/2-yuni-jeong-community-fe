@@ -1,7 +1,7 @@
 import { validateNickname } from './validation.js';
 import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 import { initializeProfilePhoto } from './profilePhoto.js';
-import { API_BASE_URL } from './config.js';
+import { API_BASE_URL, DEFAULT_PROFILE_IMAGE } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
     await checkLogin();
@@ -35,11 +35,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 emailDisplay.textContent = data.email;
                 nicknameInput.value = data.nickname;
 
-                if (data.profile_image) {
-                    profilePhotoContainer.style.backgroundImage = `url(${API_BASE_URL}${data.profile_image})`;
-                } else {
-                    profilePhotoContainer.style.backgroundImage = `url(${API_BASE_URL}/uploads/user-profile.jpg)`;
-                }
+                profilePhotoContainer.style.backgroundImage = `url(${
+                    data.profile_image || DEFAULT_PROFILE_IMAGE
+                })`;
 
                 profilePhotoContainer.style.backgroundSize = 'cover';
                 profilePhotoContainer.style.backgroundPosition = 'center';
