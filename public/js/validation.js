@@ -107,7 +107,7 @@ export const validateNickname = async (nicknameInput, context = 'signup') => {
             });
             const { data } = await response.json();
 
-            // 자신의 닉네임은 이메일 중복 검사 안함
+            // 자신의 닉네임은 닉네임 중복 검사 안함
             if (data.nickname === nicknameValue) {
                 nicknameHelper.textContent = '';
                 return true;

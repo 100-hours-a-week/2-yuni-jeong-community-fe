@@ -1,4 +1,4 @@
-import { API_BASE_URL } from './config.js';
+import { API_BASE_URL, MAX_FILE_SIZE } from './config.js';
 import { validateTitle, validateContent } from './validation.js';
 import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
 
@@ -54,6 +54,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     imageInput.addEventListener('change', () => {
         const file = imageInput.files[0];
+
+        if (file && file.size > MAX_FILE_SIZE) {
+            alert('파일 크기가 너무 큽니다. 최대 5MB까지 업로드할 수 있습니다.');
+            imageInput.value = '';
+        }
+
         if (file) {
             fileUploadText.textContent = file.name;
         } else {
