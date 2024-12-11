@@ -1,4 +1,4 @@
-import { DEFAULT_PROFILE_IMAGE } from './config.js';
+import { DEFAULT_PROFILE_IMAGE, MAX_FILE_SIZE } from './config.js';
 export const initializeProfilePhoto = (
     profilePhotoInput,
     profilePhotoContainer,
@@ -8,6 +8,12 @@ export const initializeProfilePhoto = (
     // 프로필 사진 변경
     profilePhotoInput?.addEventListener('change', () => {
         const file = profilePhotoInput.files[0];
+
+        if (file && file.size > MAX_FILE_SIZE) {
+            alert('파일 크기가 너무 큽니다. 최대 5MB까지 업로드할 수 있습니다.');
+            profilePhotoInput.value = '';
+        }
+
         if (file) {
             const reader = new FileReader();
             reader.onload = e => {
