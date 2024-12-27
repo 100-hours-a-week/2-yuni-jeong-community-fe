@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const commentList = document.querySelector('.comment-list');
         const commentItem = document.createElement('div');
         commentItem.classList.add('comment-item');
+    
 
         commentItem.innerHTML = `
             <div class="comment-author-avatar">
@@ -139,7 +140,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     ` : ''}
                     </div>
                 </div>
-                <p class="comment-text">${comment.content}</p>
+                <p class="comment-text">${comment.content.replace(/\n/g, '<br>')}</p>
             </div>
         `;
         setCommentActions(commentItem, comment);
