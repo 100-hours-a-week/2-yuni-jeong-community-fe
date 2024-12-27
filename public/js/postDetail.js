@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         postTitle.textContent = post.title;
         postAuthor.textContent = post.author;
         postDate.textContent = formatDate(post.created_at);
-        postContent.textContent = post.content;
+        postContent.innerHTML = post.content.replace(/\n/g, '<br>');
 
         const postAuthorProfileImage = document.getElementById('postAuthorProfileImage');
         postAuthorProfileImage.src = post.profile_image || DEFAULT_PROFILE_IMAGE;
