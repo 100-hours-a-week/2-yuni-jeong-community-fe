@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 credentials: 'include'
             })
 
-            console.log(response)
             if (response.ok) {
                 const { data } = await response.json();
                 if (profileImage) {
