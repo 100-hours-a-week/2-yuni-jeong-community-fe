@@ -62,8 +62,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             );
             const { data: posts } = await response.json();
 
-            console.log(posts)
-
             if (!posts || posts.length === 0) {
                 loading = false;
                 return;
