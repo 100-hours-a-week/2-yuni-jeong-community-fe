@@ -1,5 +1,7 @@
-FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
+FROM node:21-alpine
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install
 COPY . .
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+CMD ["node", "server.js"]
