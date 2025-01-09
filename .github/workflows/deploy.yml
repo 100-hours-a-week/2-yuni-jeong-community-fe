@@ -34,6 +34,7 @@ jobs:
                 username: ${{ secrets.EC2_USERNAME }}
                 key: ${{ secrets.EC2_PRIVATE_KEY }}
                 script: |
+                    aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY_URI }}
                     docker pull ${{ secrets.ECR_REPOSITORY_URI }}:latest
                     docker stop frontend-container || true # 기존 컨테이너가 있으면 중지
                     docker rm frontend-container || true # 기존 컨테이너가 있으면 삭제
