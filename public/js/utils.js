@@ -1,8 +1,13 @@
 import { API_BASE_URL } from './config.js';
 export const updateButtonState = (button, isValid) => {
-    if (!button) return;
-    button.disabled = !isValid;
-    button.style.backgroundColor = isValid ? '#272f7a' : '#708dc7';
+    // if (!button) return;
+    // button.disabled = !isValid;
+    // button.style.backgroundColor = isValid ? '#272f7a' : '#708dc7';
+    if (isValid) {
+        button.removeAttribute('disabled'); // 활성화
+    } else {
+        button.setAttribute('disabled', 'true'); // 비활성화
+    }
 };
 
 export const showToastMessage = message => {

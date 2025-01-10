@@ -46,22 +46,74 @@
     font-style: normal;
 }
 
-.page-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 20px;
-    margin-bottom: 600px;
+@font-face {
+    font-family: 'Behance';
+    src: url('/assets/fonts/behance-65a9ae29a5cd4.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exan';
+    src: url('/assets/fonts/Exan-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mylodon';
+    src: url('/assets/fonts/Mylodon-Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('/assets/fonts/DungGeunMo.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-    background-color: #cddafd;
+    background-image: url('../images/5.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 50px;
+}
+
+/* .page-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+} */
+
+
+.page-container {
+    border: 2px solid rgba(173, 216, 230, 0.3); /* 연한 네온 테두리 */
+    box-shadow: 0 0 10px rgba(173, 216, 230, 0.5), 
+                0 0 20px rgba(173, 216, 230, 0.3);
+    background: rgba(255, 255, 255, 0.05); /* 반투명 배경 */
+    backdrop-filter: blur(15px); /* 글래스모픽 효과 */
+    border-radius: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.page-container:hover {
+    transform: translateY(-5px); /* 살짝 위로 떠오르는 효과 */
+    box-shadow: 0 0 20px rgba(173, 216, 230, 0.6), 
+                0 0 30px rgba(173, 216, 230, 0.4);
 }
 
 .community-header {
     display: flex;
     align-items: center;
-    height: 104px;
-    background-color: #cddafd;
+    height: 150px;
     width: 600px;
     padding: 0 20px;
     margin: auto;
@@ -69,37 +121,29 @@ body {
 }
 
 .community-title {
-    font-family: 'GangwonEduPowerExtraBoldA';
-    font-size: 32px;
+    font-family: 'Behance', sans-serif;
+    font-size: 40px;
     font-weight: 400;
     line-height: 32px;
     text-align: center;
-    color: #000000;
+    color: #ffffff;
     flex: 1;
     cursor: pointer;
+    /* text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 
+    0 0 16px rgba(173, 216, 230, 0.6); */
 }
 
-.header-divider {
-    width: 100%;
-    height: 1px;
-    background-color: #708dc7;
-}
 
 .page-title {
-    font-family: 'Pretendard-Regular';
+    font-family: 'DungGeunMo', sans-serif;
+    font-size: 28px;
     font-weight: 700;
-    font-size: 32px;
     text-align: center;
-    margin-top: 100px;
-    margin-bottom: 20px;
-    justify-content: center;
-}
-
-.input-group label {
-    font-family: 'Pretendard-Medium';
-    font-size: 15px;
-    font-weight: 700;
-    color: #000000;
+    color: #ffffff;
+    margin-top: 30px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 
+                 0 0 16px rgba(173, 216, 230, 0.6);
+    margin-bottom: 30px;
 }
 
 .helper-text {
@@ -107,35 +151,7 @@ body {
     font-weight: 400;
     font-size: 12px;
     line-height: 14.52px;
-    color: #ff0000;
-}
-
-.submitButton {
-    width: 100%;
-    height: 37px;
-    background-color: #708dc7;
-    color: #ffffff;
-    font-family: 'Pretendard-Medium';
-    font-weight: 700;
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.bottomButton {
-    width: 100%;
-    height: 30px;
-    background-color: #ffffff;
-    font-family: 'Pretendard-Medium';
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    line-height: 16.71px;
-    cursor: pointer;
-    border: none;
+    color: #ad3535;
 }
 
 .back-button {
@@ -143,7 +159,7 @@ body {
     margin-left: 0;
     font-weight: 200;
     font-size: 36px;
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
     cursor: pointer;
 }
@@ -186,52 +202,68 @@ body {
     font-family: 'Pretendard-Medium';
     font-size: 15px;
     font-weight: 700;
-    color: #000000;
+    color: #ffffff;
 }
 
 .input-group input {
-    width: 100%;
     padding: 10px;
     font-size: 15px;
-    border: 1px solid #708dc7;
-    border-radius: 4px;
+    border: 1px solid #2a2d32;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
     box-sizing: border-box;
-    background-color: #ffffff;
 }
 
 .submitButton {
-    width: 100%;
-    height: 37px;
-    background-color: #708dc7;
+    width: 160px;
+    height: 45px;
+    background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
     color: #ffffff;
-    font-family: 'Pretendard-Medium';
+    font-family: 'Pretendard-Medium', sans-serif;
+    font-size: 16px;
     font-weight: 700;
-    font-size: 15px;
     text-align: center;
     border: none;
-    border-radius: 4px;
+    border-radius: 25px;
     cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(30, 60, 114, 0.6);
+    opacity: 0.5; /* 초기 비활성화 상태 */
+    pointer-events: none; /* 클릭 비활성화 */
 }
 
 .submitButton:enabled {
-    background-color: #272f7a;
+    opacity: 1; /* 활성화 시 투명도 제거 */
+    pointer-events: auto; /* 클릭 활성화 */
 }
 
 .submitButton:disabled {
-    background-color: #708dc7;
-    cursor: not-allowed;
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 16px rgba(30, 60, 114, 0.8);
 }
 
 .bottomButton {
-    width: 100%;
-    height: 30px;
-    background-color: #cddafd;
-    font-family: 'Pretendard-Medium';
+    width: 120px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #aaaaaa;
+    font-family: 'Pretendard-Medium', sans-serif;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     text-align: center;
+    border-radius: 15px;
     cursor: pointer;
-    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: none; /* 그림자 제거 */
+    margin-top: 10px;
+}
+
+.bottomButton:hover {
+    background: rgba(255, 255, 255, 0.2); /* 호버 시 약간 강조 */
+    color: #ffffff; /* 텍스트 색상 변경 */
+    transform: translateY(-2px); /* 살짝 올라감 */
 }
 
 .dropdown-menu {

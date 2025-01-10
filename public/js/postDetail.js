@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
             // 이미지가 없는 경우
             postImageContainer.classList.remove('has-image');
-            postImageContainer.style.backgroundColor = '#dde8fd';
+            // postImageContainer.style.backgroundColor = '#f3f3f3';
         }
 
         document.getElementById('likes-count').textContent = formatNumber(
