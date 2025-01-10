@@ -6,7 +6,7 @@
 .profile-photo {
     width: 100px;
     height: 100px;
-    background-color: #9EB4E2;
+    background-color: #0f1d37;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -20,7 +20,7 @@
 
 .plus-icon {
     font-size: 40px;
-    color: #708dc7;
+    color: #34415d;
     font-weight: 300;
 }
 
