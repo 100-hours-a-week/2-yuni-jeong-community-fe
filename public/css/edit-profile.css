@@ -1,34 +1,34 @@
-.saveChangesButton {
-    width: auto;
-    height: 46px;
-    padding: 0 20px;
-    background-color: #708dc7;
-    color: #ffffff;
-    font-family: 'Pretendard-Medium';
-    font-size: 18px;
-    font-weight: 400;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    text-align: center;
-    line-height: 46px;
+.page-container {
+    border: 2px solid rgba(173, 216, 230, 0.3); /* 연한 네온 테두리 */
+    box-shadow: 0 0 10px rgba(173, 216, 230, 0.5), 
+                0 0 20px rgba(173, 216, 230, 0.3);
+    background: rgba(255, 255, 255, 0.05); /* 반투명 배경 */
+    backdrop-filter: blur(10px); /* 글래스모픽 효과 */
+    border-radius: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
-.saveChangesButton:enabled {
-    background-color: #272f7a;
+.page-container:hover {
+    transform: translateY(-5px); /* 살짝 위로 떠오르는 효과 */
+    box-shadow: 0 0 20px rgba(173, 216, 230, 0.6), 
+                0 0 30px rgba(173, 216, 230, 0.4);
 }
-.saveChangesButton:disabled {
-    background-color: #708dc7;
-    cursor: not-allowed;
-}
+
 
 .email-display {
     width: 100%;
-    padding: 10px 0 0 0;
+    padding: 10px;
     font-size: 15px;
     font-family: 'Pretendard-Medium';
-    color: #000000;
-    background-color: #cddafd;
+    color: #ffffff;
     border: none;
+    border-radius: 8px;
+    text-align: left;
     box-sizing: border-box;
 }
