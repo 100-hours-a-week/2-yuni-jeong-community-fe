@@ -76,9 +76,9 @@
 
 body {
     background-image: url('../images/5.jpg');
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
     margin-bottom: 50px;
+    background-repeat: repeat;
 }
 
 /* .page-container {
