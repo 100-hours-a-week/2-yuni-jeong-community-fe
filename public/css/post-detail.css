@@ -123,6 +123,8 @@
     line-height: 21.15px;
     margin-bottom: 20px;
     text-align: left;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 /* 좋아요, 조회수, 댓글 */
@@ -299,6 +301,9 @@
     font-size: 15px;
     font-weight: 400;
     margin-top: 10px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 490px;
 }
 
 #likes-button {
