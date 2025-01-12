@@ -7,6 +7,7 @@
     font-weight: 700;
     width: 100%;
     margin-bottom: 20px;
+    white-space: pre-wrap;
 }
 
 /* 작성자 정보 */
@@ -123,6 +124,8 @@
     line-height: 21.15px;
     margin-bottom: 20px;
     text-align: left;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 /* 좋아요, 조회수, 댓글 */
@@ -182,6 +185,7 @@
 }
 
 .comment-input {
+    font-family: 'Pretendard-Medium';
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 16px;
@@ -299,6 +303,9 @@
     font-size: 15px;
     font-weight: 400;
     margin-top: 10px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 490px;
 }
 
 #likes-button {
