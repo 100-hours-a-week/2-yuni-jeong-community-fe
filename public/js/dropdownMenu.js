@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     const dropdownMenu = document.getElementById('dropdownMenu');
 
     const fetchUserProfile = async () => {
+
+        if (profileImage) {
+            profileImage.src = DEFAULT_PROFILE_IMAGE;
+        }
+        
         try {
             const response = await fetch(`${API_BASE_URL}/auth/current`, {
                 credentials: 'include'
