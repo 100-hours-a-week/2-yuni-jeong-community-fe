@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         profilePhotoHelper,
         plusIcon,
     );
-
+    
     const checkEmailDuplicate = async email => {
         try {
             const response = await fetch(`${API_BASE_URL}/users/check-email?email=${email}`);
@@ -60,12 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // 회원가입 버튼 활성화 상태 업데이트
-    const updateRegisterButtonState = () => {
-        const isFormValid =
-            validateEmail(emailInput) &&
-            validatePassword(passwordInput) &&
-            validatePasswordConfirm(passwordInput, passwordConfirmInput) &&
-            validateNickname(nicknameInput);
+    const updateRegisterButtonState = async () => {
+        const isEmailValid = await validateEmail(emailInput);
+        const isPasswordValid = validatePassword(passwordInput);
+        const isPasswordConfirmValid = validatePasswordConfirm(passwordInput, passwordConfirmInput);
+        const isNicknameValid = await validateNickname(nicknameInput);
+    
+        const isFormValid = isEmailValid && isPasswordValid && isPasswordConfirmValid && isNicknameValid;
         updateButtonState(registerButton, isFormValid);
     };
 
@@ -73,11 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     registerButton?.addEventListener('click', async e => {
         e.preventDefault();
 
+
+        const isEmailValid = await validateEmail(emailInput);
+        const isPasswordValid = validatePassword(passwordInput);
+        const isPasswordConfirmValid = validatePasswordConfirm(passwordInput, passwordConfirmInput);
+        const isNicknameValid = await validateNickname(nicknameInput);
+
         if (
-            validateEmail(emailInput) &&
-            validatePassword(passwordInput) &&
-            validatePasswordConfirm(passwordInput, passwordConfirmInput) &&
-            validateNickname(nicknameInput)
+            isEmailValid && isPasswordValid && isPasswordConfirmValid && isNicknameValid
         ) {
             const formData = new FormData();
             formData.append('email', emailInput.value.trim());
