@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (editButton){
             editButton.addEventListener('click', () => {
-                commentInput.value = comment.content;
+                commentInput.value = decodeHTML(comment.content);
                 submitButton.textContent = '댓글 수정';
                 editingCommentId = comment.comment_id;
             });
