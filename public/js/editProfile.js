@@ -1,5 +1,5 @@
 import { validateNickname } from './validation.js';
-import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
+import { updateButtonState, showToastMessage, checkLogin, decodeHTML } from './utils.js';
 import { initializeProfilePhoto } from './profilePhoto.js';
 import { API_BASE_URL, DEFAULT_PROFILE_IMAGE } from './config.js';
 
@@ -36,8 +36,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (response.ok) {
                 const { data } = await response.json();
                 emailDisplay.textContent = data.email;
-                nicknameInput.value = data.nickname;
-                originalNickname = data.nickname;
+                nicknameInput.value = decodeHTML(data.nickname);
                 originalProfileImage = data.profile_image || DEFAULT_PROFILE_IMAGE;
 
                 profilePhotoContainer.style.backgroundImage = `url(${originalProfileImage})`;
