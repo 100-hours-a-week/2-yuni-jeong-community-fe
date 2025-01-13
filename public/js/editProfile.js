@@ -95,6 +95,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             if (response.ok) {
                 showToastMessage('수정 완료');
+
+                const profileUpdateEvent = new CustomEvent('profileUpdate', {
+                    detail: {
+                        profileImage: result.data.profile_image || DEFAULT_PROFILE_IMAGE,
+                    },
+                });
+                document.dispatchEvent(profileUpdateEvent);
+                
                 await fetchUserInfo();
             } else {
                 showToastMessage(result.message || '수정 실패');

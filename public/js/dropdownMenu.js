@@ -45,6 +45,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                 dropdownMenu.style.display = 'none';
             }
         });
+
+        document.addEventListener('profileUpdate', event => {
+            if (event.detail && event.detail.profileImage) {
+                profileImage.src = event.detail.profileImage;
+            }
+        });
     }
 
     await fetchUserProfile();
