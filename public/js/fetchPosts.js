@@ -1,4 +1,4 @@
-import { formatDate, checkLogin } from './utils.js';
+import { formatDate, checkLogin, decodeHTML } from './utils.js';
 import { API_BASE_URL } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     class="post-author-profile"
                     />
                 </div>
-                <div class="post-author-name">${post.author}</div>
+                <div class="post-author-name">${decodeHTML(post.author)}</div>
             </div>
         `;
 

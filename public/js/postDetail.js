@@ -1,5 +1,5 @@
 import { API_BASE_URL, DEFAULT_PROFILE_IMAGE } from './config.js';
-import { formatDate, formatNumber, checkLogin } from './utils.js';
+import { formatDate, formatNumber, checkLogin, decodeHTML } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     await checkLogin();
@@ -39,12 +39,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const renderPost =async(post) => {
-        const currentUserId = await getCurrentUserId();
-
-        postTitle.textContent = post.title;
-        postAuthor.textContent = post.author;
+        postTitle.textContent = decodeHTML(post.title);
+        postAuthor.textContent = decodeHTML(post.author);
         postDate.textContent = formatDate(post.created_at);
-        postContent.innerHTML = post.content.replace(/\n/g, '<br>');
+        postContent.textContent = decodeHTML(post.content).replace(/\n/g, '<br>');
 
         const postAuthorProfileImage = document.getElementById('postAuthorProfileImage');
         postAuthorProfileImage.src = post.profile_image || DEFAULT_PROFILE_IMAGE;
@@ -119,7 +117,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const commentList = document.querySelector('.comment-list');
         const commentItem = document.createElement('div');
         commentItem.classList.add('comment-item');
-    
 
         commentItem.innerHTML = `
             <div class="comment-author-avatar">
@@ -131,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
             <div class="comment-content">
                 <div class="comment-item-header">
-                    <span class="comment-author-name">${comment.author}</span>
+                    <span class="comment-author-name">}</span>
                     <span class="comment-date">${formatDate(comment.created_at)}</span>
                     <div class="comment-actions">
                     ${comment.isAuthor ? `
@@ -140,9 +137,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                     ` : ''}
                     </div>
                 </div>
-                <p class="comment-text">${comment.content.replace(/\n/g, '<br>')}</p>
+                <p class="comment-text"></p>
             </div>
         `;
+        
+        const authorNameElement = commentItem.querySelector('.comment-author-name');
+        const commentTextElement = commentItem.querySelector('.comment-text');
+        authorNameElement.textContent = decodeHTML(comment.author);
+        commentTextElement.textContent = decodeHTML(comment.content);
+
         setCommentActions(commentItem, comment);
         commentList.appendChild(commentItem);
     };

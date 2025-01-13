@@ -1,6 +1,6 @@
 import { API_BASE_URL } from './config.js';
 import { validateTitle, validateContent } from './validation.js';
-import { updateButtonState, showToastMessage, checkLogin } from './utils.js';
+import { updateButtonState, showToastMessage, checkLogin, decodeHTML } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     await checkLogin();
@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const { data: post } = await response.json();
 
             if (post) {
-                titleInput.value = post.title;
-                contentInput.value = post.content;
+                titleInput.value = decodeHTML(post.title);
+                contentInput.value = decodeHTML(post.content);
 
                 if (post.image_url) {
                     fileUploadText.textContent = post.image_url.split('/').pop(); // 파일명 표시
