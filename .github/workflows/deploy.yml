@@ -31,7 +31,7 @@ jobs:
               uses: einaregilsson/beanstalk-deploy@v21
               with:
                 application_name: "community"
-                environment_name: "community-frontend"
+                environment_name: "community-fe"
                 version_label: "frontend-v1.0.${{ github.run_number }}"
                 region: "ap-northeast-2"
                 aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
