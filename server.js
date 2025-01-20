@@ -53,6 +53,10 @@ app.get('/privacy', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'terms', 'privacy.html'));
 });
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: "Healthy" });
+});
+
 app.listen(3000, () => {
     console.log(`http://${HOST}:${PORT} 에서 서버 실행 중`);
 });
