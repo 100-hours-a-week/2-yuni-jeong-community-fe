@@ -1,7 +1,11 @@
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import Dotenv from 'dotenv-webpack';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
     entry: './public/js/login.js',
     output: {
         filename: 'bundle.js',
