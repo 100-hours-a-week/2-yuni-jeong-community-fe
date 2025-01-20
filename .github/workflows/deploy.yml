@@ -20,6 +20,16 @@ jobs:
                 aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                 aws-region: ap-northeast-2
 
+
+            - name: Node.js 설정 및 의존성 설치
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+            - run: npm install
+
+            - name: Webpack 빌드
+              run: npm run build
+
             - name: Docker 이미지 빌드 및 푸시
               run: |
                 aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY_URI }}
