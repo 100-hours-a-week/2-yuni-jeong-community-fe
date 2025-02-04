@@ -72,13 +72,18 @@ document.addEventListener('DOMContentLoaded', async function () {
         const formData = new FormData();
         
         const newNickname = nicknameInput.value.trim();
-        formData.append('nickname', newNickname);
+        if (newNickname !== originalNickname) {
+            formData.append('nickname', newNickname);
+        }
 
         const file = profilePhotoInput.files[0];
         if (file) {
             formData.append('profile_image', file);
-        } else {
-            formData.append('profile_image', 'default');
+        } 
+
+        if (!formData.has('nickname') && !formData.has('profile_image')) {
+            showToastMessage('변경된 내용이 없습니다.');
+            return;
         }
 
         try {
