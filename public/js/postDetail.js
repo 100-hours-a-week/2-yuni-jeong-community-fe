@@ -249,7 +249,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     alert('댓글이 등록되었습니다.');
                 }
                 commentInput.value = '';
-                await fetchPost();
                 await fetchComments();
             } else {
                 const result = await response.json();
