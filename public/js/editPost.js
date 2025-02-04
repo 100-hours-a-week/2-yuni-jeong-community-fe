@@ -1,4 +1,4 @@
-import { API_BASE_URL } from './config.js';
+import { API_BASE_URL, MAX_FILE_SIZE} from './config.js';
 import { validateTitle, validateContent } from './validation.js';
 import { updateButtonState, showToastMessage, checkLogin, decodeHTML } from './utils.js';
 
@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 contentInput.value = decodeHTML(post.content);
 
                 if (post.image_url) {
-                    fileUploadText.textContent = post.image_url.split('/').pop(); // 파일명 표시
+                    const filename = decodeURIComponent(post.image_url.split('/').pop());
+                    fileUploadText.textContent = filename;
                 }
 
                 updateEditButtonState();
@@ -71,7 +72,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (response.ok) {
                 showToastMessage('게시글이 수정되었습니다.');
-                setTimeout(() => (window.location.href = `/post?id=${result.data.post_id}`), 1000);
+
+                if (result.data && result.data.post_id) {
+                    if (result.data.image_url) {
+                        fileUploadText.textContent = decodeURIComponent(result.data.file_name);
+                    }
+                    
+                    setTimeout(() => (window.location.href = `/post?id=${result.data.post_id}`), 1000);
+                }
             } else {
                 const result = await response.json();
                 showToastMessage(result.message || '게시글 수정 실패');
@@ -93,7 +101,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         
         if (file) {
-            fileUploadText.textContent = file.name;
+            fileUploadText.textContent = decodeURIComponent(file.name);
         } else {
             fileUploadText.textContent = '파일을 선택해주세요.';
         }
