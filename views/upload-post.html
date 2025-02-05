@@ -49,8 +49,12 @@
                         type="text"
                         id="post-title"
                         maxlength="26"
-                        placeholder="제목을 입력하세요. (최대 26글자)"
+                        placeholder="제목을 입력해주세요. (최대 26글자)"
                     />
+                    <div class="char-count-container">
+                        <span class="char-count" id="title-char-count">0/26</span>
+                        
+                    </div>
                     <span class="helper-text" id="title-helper-text"></span>
                 </div>
 
@@ -58,8 +62,11 @@
                     <label for="post-content">내용*</label>
                     <textarea
                         id="post-content"
-                        placeholder="내용을 입력해주세요."
+                        placeholder="내용을 입력해주세요. (최대 1500자)"
                     ></textarea>
+                    <div class="char-count-container">
+                        <span class="char-count" id="content-char-count">0/1500</span>
+                    </div>
                     <span class="helper-text" id="content-helper-text"></span>
                 </div>
 

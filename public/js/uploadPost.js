@@ -69,6 +69,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    titleInput.addEventListener('input', updateSubmitButtonState);
-    contentInput.addEventListener('input', updateSubmitButtonState);
+    contentInput.addEventListener('input', () => {
+        validateContent(contentInput);
+        updateSubmitButtonState();
+    });
+
+    titleInput.addEventListener('input', () => {
+        validateTitle(titleInput);
+        updateSubmitButtonState();
+    });
+    
 });

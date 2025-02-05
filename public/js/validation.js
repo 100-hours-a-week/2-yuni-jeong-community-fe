@@ -1,4 +1,6 @@
 import { API_BASE_URL } from './config.js';
+
+// ---------- 회원가입/로그인 validation ----------
 export const validateEmail = async (emailInput, context = 'signup') => {
     if (!emailInput) return true;
 
@@ -130,16 +132,27 @@ export const validateNickname = async (nicknameInput, context = 'signup') => {
     }
 };
 
+
+// ---------- 게시글 제목, 내용, 댓글 validation ----------
+export const MAX_TITLE_LENGTH = 26;
+export const MAX_CONTENT_LENGTH = 1500;
+export const MAX_COMMENT_LENGTH = 300;
+
 export const validateTitle = titleInput => {
     if (!titleInput) return true;
 
-    const titleHelperText = titleInput?.nextElementSibling;
+    const titleHelperText = titleInput?.nextElementSibling.nextElementSibling;
+    const titleCharCount = document.getElementById('title-char-count');
     const titleLength = titleInput.value.length;
 
-    if (titleLength > 26) {
-        titleHelperText.textContent = '*제목은 최대 26자까지 작성 가능합니다.';
-        return false;
-    } else if (titleLength === 0) {
+    if (titleLength > MAX_TITLE_LENGTH) {
+        titleInput.value = titleInput.value.substring(0, MAX_TITLE_LENGTH);
+        titleLength = MAX_TITLE_LENGTH;
+    }
+
+    titleCharCount.textContent = `${titleLength}/${MAX_TITLE_LENGTH}`;
+
+    if (titleLength === 0) {
         titleHelperText.textContent = '*제목을 입력해주세요.';
         return false;
     } else {
@@ -151,8 +164,18 @@ export const validateTitle = titleInput => {
 export const validateContent = contentInput => {
     if (!contentInput) return true;
 
-    const contentHelperText = contentInput?.nextElementSibling;
+    const contentHelperText = contentInput?.nextElementSibling.nextElementSibling;
+    const contentCharCount = document.getElementById('content-char-count');
     const contentLength = contentInput.value.length;
+
+    if (contentLength > MAX_CONTENT_LENGTH) {
+        contentInput.value = contentInput.value.substring(0, MAX_CONTENT_LENGTH);
+        contentLength = MAX_CONTENT_LENGTH;
+    }
+
+    if (contentCharCount) {
+        contentCharCount.textContent = `${contentLength}/${MAX_CONTENT_LENGTH}`;
+    }
 
     if (contentLength === 0) {
         contentHelperText.textContent = '*내용을 입력해주세요.';
@@ -162,6 +185,33 @@ export const validateContent = contentInput => {
         return true;
     }
 };
+
+export const validateComment = commentInput => {
+    if (!commentInput) return true;
+
+    const commentHelperText = commentInput?.nextElementSibling.nextElementSibling;
+    const commentCharCount = document.getElementById('comment-char-count');
+    const commentLength = commentInput.value.length;
+    
+    if (commentLength > MAX_COMMENT_LENGTH) {
+        commentInput.value = commentInput.value.substring(0, MAX_COMMENT_LENGTH);
+        commentLength = MAX_COMMENT_LENGTH;
+    }
+
+    if (commentCharCount) {
+        commentCharCount.textContent = `${commentLength}/${MAX_COMMENT_LENGTH}`;
+    }
+
+    if (commentLength === 0) {
+        commentHelperText.textContent = '*댓글을 입력해주세요.';
+        return false;
+    } else {
+        commentHelperText.textContent = '';
+        return true;
+    }
+};
+
+// ---------- 프로필 이미지 validation ----------
 
 export const validateProfilePhoto = profilePhotoInput => {
     if (!profilePhotoInput) return true;

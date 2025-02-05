@@ -107,8 +107,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    titleInput.addEventListener('input', updateEditButtonState);
-    contentInput.addEventListener('input', updateEditButtonState);
+
+    contentInput.addEventListener('input', () => {
+        validateContent(contentInput);
+        updateEditButtonState();
+    });
+
+    titleInput.addEventListener('input', () => {
+        validateTitle(titleInput);
+        updateEditButtonState();
+    });
 
     editButton.addEventListener('click', async e => {
         e.preventDefault();
