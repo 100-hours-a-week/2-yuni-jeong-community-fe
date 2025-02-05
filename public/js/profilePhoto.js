@@ -45,5 +45,9 @@ const resetToDefaultProfileImage = (profilePhotoContainer, plusIcon, profilePhot
     profilePhotoContainer.style.backgroundPosition = 'center';
     if (plusIcon) plusIcon.style.display = 'flex';
     if (profilePhotoHelper) profilePhotoHelper.style.display = 'block';
+
+    if (typeof window.updateSaveButtonState === 'function') {
+        window.updateSaveButtonState();
+    }
 };
 

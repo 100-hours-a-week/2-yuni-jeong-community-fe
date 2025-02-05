@@ -59,11 +59,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     };
 
-    // 회원정보 수정 버튼 활성화 상태 업데이트
-    const updateSaveButtonState = async () => {
+    window.updateSaveButtonState = async () => {
         const isNicknameChanged = nicknameInput.value.trim() !== originalNickname && (await validateNickname(nicknameInput, 'edit'));
-        const isProfileImageChanged = profilePhotoInput.files.length > 0;
-
+        const isProfileImageChanged = 
+            profilePhotoInput.files.length > 0 || 
+            profilePhotoContainer.dataset.changed === "true";
         updateButtonState(saveButton, isNicknameChanged || isProfileImageChanged);
     };
 
@@ -79,7 +79,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         const file = profilePhotoInput.files[0];
         if (file) {
             formData.append('profile_image', file);
-        } 
+        } else if (profilePhotoContainer.style.backgroundImage === `url("${DEFAULT_PROFILE_IMAGE}")` && originalProfileImage !== DEFAULT_PROFILE_IMAGE) {
+            formData.append('profile_image', 'default');
+        }
 
         if (!formData.has('nickname') && !formData.has('profile_image')) {
             showToastMessage('변경된 내용이 없습니다.');
