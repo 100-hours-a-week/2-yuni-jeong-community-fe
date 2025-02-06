@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         postTitle.textContent = decodeHTML(post.title);
         postAuthor.textContent = decodeHTML(post.author);
         postDate.textContent = formatDate(post.created_at);
-        postContent.textContent = decodeHTML(post.content).replace(/\n/g, '<br>');
+        postContent.textContent = decodeHTML(post.content); 
 
         const postAuthorProfileImage = document.getElementById('postAuthorProfileImage');
         postAuthorProfileImage.src = post.profile_image || DEFAULT_PROFILE_IMAGE;
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     ` : ''}
                     </div>
                 </div>
-                <p class="comment-text"></p>
+                <p class="comment-text">${decodeHTML(comment.content)}</p>
             </div>
         `;
         

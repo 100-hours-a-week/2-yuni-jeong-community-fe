@@ -79,5 +79,5 @@ export const checkLogin = async () => {
 export function decodeHTML(str) {
     const textarea = document.createElement('textarea');
     textarea.innerHTML = str;
-    return textarea.value;
+    return textarea.value.replace(/&#10;/g, "<br>");
 }
