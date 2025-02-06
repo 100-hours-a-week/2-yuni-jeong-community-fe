@@ -212,6 +212,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (response.ok) {
                 alert('댓글이 삭제되었습니다.');
                 fetchComments();
+                await updateCommentCount();
             } else {
                 const errorData = await response.json();
                 alert(`댓글 삭제 실패: ${errorData.message}`);
@@ -219,6 +220,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error('Error deleting comment:', error);
             alert('댓글 삭제 중 오류가 발생했습니다.');
+        }
+    };
+
+    const updateCommentCount = async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/posts/${post_id}`, {
+                credentials: 'include',
+            });
+            const { data: post } = await response.json();
+    
+            if (post) {
+                document.getElementById('comments-count').textContent = formatNumber(post.comments_count);
+            }
+        } catch (error) {
+            console.error('Error updating comment count:', error);
         }
     };
 
@@ -250,6 +266,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
                 commentInput.value = '';
                 await fetchComments();
+                await updateCommentCount();
             } else {
                 const result = await response.json();
                 alert(`오류: ${result.message}`);
